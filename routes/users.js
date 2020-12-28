@@ -121,7 +121,8 @@ router.post('/signup', (req, res, next) => {
       'password': hash,
       'name': req.body.name,
       'secondName': req.body.secondName,
-      'admin': false
+      'admin': false,
+      'groupAdmin': false
     });
     user.save().then(result => {
       res.status(201).json({
