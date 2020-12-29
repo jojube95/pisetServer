@@ -6,6 +6,7 @@ const subtaskSchema = mongoose.Schema({
   penalty: {type: Number, required: true},
   taskId: {type: String, required: true},
   groupId: {type: String, required: true},
+  done: {type: Boolean, required: true},
   userId: {type: String, required: false}
 });
 

@@ -7,7 +7,9 @@ const userSchema = mongoose.Schema({
   secondName: { type: String, required: true},
   admin:  {type: Boolean, required: true},
   groupAdmin:  {type: Boolean, required: true},
-  groupId:  {type: String, required: false}
+  groupDealer:  {type: Boolean, required: true},
+  groupId:  {type: String, required: false},
+  groupName:  {type: String, required: false}
 });
 
 module.exports = mongoose.model('User', userSchema);

@@ -19,7 +19,10 @@
   "secondName": "User1",
   "admin": false,
   "__v": 0,
-  "groupId": "5fde502a9e491a29eca14528"
+  "groupId": "5fde502a9e491a29eca14528",
+  "groupName": "Group1",
+  "groupAdmin": false,
+  "groupDealer": false
 },{
   "_id": {
     "$oid": "5fde50609e491a29eca14548"
@@ -30,7 +33,10 @@
   "secondName": "User2",
   "admin": false,
   "__v": 0,
-  "groupId": "5fde502a9e491a29eca14528"
+  "groupId": "5fde502a9e491a29eca14528",
+  "groupName": "Group1",
+  "groupAdmin": false,
+  "groupDealer": false
 },{
   "_id": {
     "$oid": "5fde50609e491a29eca14549"
@@ -41,7 +47,10 @@
   "secondName": "User3",
   "admin": false,
   "__v": 0,
-  "groupId": "5fde502a9e491a29eca14528"
+  "groupId": "5fde502a9e491a29eca14528",
+  "groupName": "Group1",
+  "groupAdmin": false,
+  "groupDealer": false
 },{
   "_id": {
     "$oid": "5fde50609e491a29eca1454a"
@@ -52,7 +61,10 @@
   "secondName": "User4",
   "admin": false,
   "__v": 0,
-  "groupId": "5fde502a9e491a29eca14528"
+  "groupId": "5fde502a9e491a29eca14528",
+  "groupName": "Group1",
+  "groupAdmin": false,
+  "groupDealer": false
 },{
   "_id": {
     "$oid": "5fde50609e491a29eca1454b"
@@ -63,7 +75,10 @@
   "secondName": "User5",
   "admin": false,
   "__v": 0,
-  "groupId": "5fde502a9e491a29eca1452a"
+  "groupId": "5fde502a9e491a29eca1452a",
+  "groupName": "Group2",
+  "groupAdmin": false,
+  "groupDealer": false
 },{
   "_id": {
     "$oid": "5fde50609e491a29eca1454c"
@@ -74,7 +89,10 @@
   "secondName": "User6",
   "admin": false,
   "__v": 0,
-  "groupId": "5fde502a9e491a29eca1452a"
+  "groupId": "5fde502a9e491a29eca1452a",
+  "groupName": "Group2",
+  "groupAdmin": false,
+  "groupDealer": false
 },{
   "_id": {
     "$oid": "5fde50609e491a29eca1454d"
@@ -85,5 +103,8 @@
   "secondName": "User7",
   "admin": false,
   "__v": 0,
-  "groupId": "5fde502a9e491a29eca1452a"
+  "groupId": "5fde502a9e491a29eca1452a",
+  "groupName": "Group2",
+  "groupAdmin": false,
+  "groupDealer": false
 }]

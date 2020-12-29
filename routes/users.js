@@ -47,7 +47,7 @@ router.get('/getByGroup:id', (req, res, next) => {
 });
 
 router.post('/addUserToGroup', (req, res, next) => {
-  User.updateOne({'_id': req.body.userId}, { $set: { groupId: req.body.groupId}}).then(result => {
+  User.updateOne({'_id': req.body.userId}, { $set: { groupId: req.body.groupId, groupName: req.body.groupName}}).then(result => {
     console.log(result);
     res.status(200).json({
       message: 'User added to group successfully',
@@ -63,7 +63,7 @@ router.post('/addUserToGroup', (req, res, next) => {
 
 router.post('/deleteUserFromGroup', (req, res, next) => {
   console.log("Trying delete user from group");
-  User.updateOne({'_id': req.body.userId}, { $set: { groupId: null}}).then(result => {
+  User.updateOne({'_id': req.body.userId}, { $set: { groupId: null, groupName: null, groupAdmin: null, groupDealer: null}}).then(result => {
     res.status(201).json({
       message: 'User deleted from group successfully',
       result: result

@@ -60,6 +60,7 @@ router.post('/addToTask', (req, res, next) => {
     penalty: req.body.subtask.penalty,
     taskId: req.body.taskId,
     groupId: req.body.groupId,
+    done: req.body.done,
     userId: req.body.subtask.userId || null
   });
 
@@ -95,6 +96,7 @@ router.post('/update', (req, res, next) => {
     penalty: req.body.subtask.penalty,
     taskId: req.body.subtask.taskId,
     groupId: req.body.subtask.groupId,
+    done: req.body.done,
     userId: req.body.subtask.userId || null
   }).then(result => {
     res.status(201).json({
