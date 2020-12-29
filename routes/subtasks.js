@@ -96,7 +96,7 @@ router.post('/update', (req, res, next) => {
     penalty: req.body.subtask.penalty,
     taskId: req.body.subtask.taskId,
     groupId: req.body.subtask.groupId,
-    done: req.body.done,
+    done: req.body.subtask.done,
     userId: req.body.subtask.userId || null
   }).then(result => {
     res.status(201).json({
