@@ -8,10 +8,12 @@ module.exports = function(io) {
 };
 
 
-router.get('/restoreDatabase', (req, res, next) => {
+router.get('/restoreDatabase:id', (req, res, next) => {
   const mongoose = req.app.get('mongoose');
 
-  let restoreProcess = 'mongorestore --archive=database/test --drop';
+  const database = req.params.id;
+
+  let restoreProcess = 'mongorestore --archive=database/' + database + ' --drop';
 
   exec(restoreProcess, (error, stdout, stderr) => {
     if (error) {
@@ -27,10 +29,12 @@ router.get('/restoreDatabase', (req, res, next) => {
 
 });
 
-router.get('/backupDatabase', (req, res, next) => {
+router.get('/exportDatabase:id', (req, res, next) => {
   const mongoose = req.app.get('mongoose');
 
-  let backupProcess = 'mongodump --db=test --archive=database/test';
+  const database = req.params.id;
+
+  let backupProcess = 'mongodump --db=' + database + ' --archive=database/' + database;
 
   exec(backupProcess, (error, stdout, stderr) => {
     if (error) {
