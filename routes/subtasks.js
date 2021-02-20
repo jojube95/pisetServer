@@ -61,7 +61,8 @@ router.post('/addToTask', (req, res, next) => {
     taskId: req.body.taskId,
     groupId: req.body.groupId,
     done: req.body.done,
-    userId: req.body.subtask.userId || null
+    userId: req.body.subtask.userId || null,
+    userName: req.body.subtask.userName || null,
   });
 
   subtask.save().then(result => {
@@ -97,7 +98,8 @@ router.post('/update', (req, res, next) => {
     taskId: req.body.subtask.taskId,
     groupId: req.body.subtask.groupId,
     done: req.body.subtask.done,
-    userId: req.body.subtask.userId || null
+    userId: req.body.subtask.userId || null,
+    userName: req.body.subtask.userName || null
   }).then(result => {
     res.status(201).json({
       message: 'Subtask updated successfully',

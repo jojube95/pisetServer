@@ -2,6 +2,7 @@ const express = require('express');
 
 const MODEL_PATH = '../models/';
 const History = require(MODEL_PATH + 'history');
+const Subtask = require(MODEL_PATH + 'subtask');
 const checkAuth = require('../middleware/check-auth');
 
 const router = express.Router();
@@ -45,6 +46,30 @@ router.post('/addHistory', (req, res, next) => {
             error: err
         });
     });
+});
+
+router.post('/generate', async (req, res, next) => {
+    //Generate history
+
+    //Loop the current group subtasks and insert into history
+    Subtask.find({ groupId: req.body.groupId }, (err, subtasks) => {
+        subtasks.forEach((subtask) => {
+            new History({
+                subtaskId: subtasks.subtaskId,
+                subtaskName: subtasks.subtaskName,
+                subtaskPenalty: subtasks.subtaskPenalty,
+                subtaskDone: subtasks.subtaskDone,
+                userId: subtasks.userId,
+                userName: subtask.userName,
+                groupId: req.body.groupId,
+                groupName: req.body.name,
+                dateIni: new Date() - 7,
+                dateFin: new Date(),
+            }).save();
+        })
+    });
+
+
 });
 
 module.exports = router;

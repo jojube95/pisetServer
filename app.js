@@ -41,29 +41,41 @@ cron.schedule("59 23 * * SUN", function () {
 
   console.log("Running Cron Job at: " + datetime);
 
-  //Do something
-  //Get all groups
+  //Find all groups
   let groups = Group.find({}, (err, groups) => {
+    //For each group. Generate history and reasign tasks
     groups.forEach((group) => {
-      //Do this for all groups
+
       let options = {
-        uri: 'http://localhost:3000/api/tasks/reasign',
+        uri: 'http://localhost:3000/api/histories/generate',
         method: 'POST',
         json: group
       };
+      //Generate history
       request.post(options, function (error, response, body) {
         if (!error) {
-          console.log('Task sheduled for group: ' + group._id);
+          console.log('Histories generated for group: ' + group._id);
+          options = {
+            uri: 'http://localhost:3000/api/tasks/reasign',
+            method: 'POST',
+            json: group
+          };
+          //Reasign task
+          request.post(options, function (error, response, body) {
+            if (!error) {
+              console.log('Task sheduled for group: ' + group._id);
+            }
+            else{
+              console.log('ERROR Task sheduled for group: ' + group._id);
+            }
+          });
         }
         else{
-          console.log('ERROR Task sheduled for group: ' + group._id);
+          console.log('ERROR Histories generated for group: ' + group._id);
         }
       });
     })
   });
-
-
-
 });
 
 app.use('/api/users', usersRoutes);
