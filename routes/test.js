@@ -3,6 +3,8 @@ const router = express.Router();
 
 const { exec } = require("child_process");
 
+let currentDate = new Date();
+
 module.exports = function(io) {
   return router;
 };
@@ -48,6 +50,25 @@ router.get('/exportDatabase:id', (req, res, next) => {
     console.log('stdout: ' + stdout);
   });
 
+});
+
+router.get('/getCurrentDate', (req, res, next) => {
+   res.status(200).json({
+      message: "Success",
+      currentDate: this.currentDate
+   });
+
+});
+
+router.get('/nextWeek', (req, res, next) => {
+  currentDate.setDate(currentDate.getDate() + 7);
+
+  console.log(currentDate);
+
+  res.status(200).json({
+    message: "Success",
+    currentDate: currentDate
+  });
 });
 
 module.exports = router;
