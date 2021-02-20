@@ -6,7 +6,7 @@ const tasksRoutes = require('./routes/tasks');
 const subtasksRoutes = require('./routes/subtasks');
 const historiesRoutes = require('./routes/histories');
 const testRoutes = require('./routes/test');
-
+const Group = require(MODEL_PATH + 'group');
 const cron = require('node-cron');
 const request = require('request');
 const app  = express();
@@ -43,21 +43,26 @@ cron.schedule("59 23 * * SUN", function () {
 
   //Do something
   //Get all groups
+  let groups = Group.find({}, (err, groups) => {
+    groups.forEach((group) => {
+      //Do this for all groups
+      let options = {
+        uri: 'http://localhost:3000/api/tasks/reasign',
+        method: 'POST',
+        json: group
+      };
+      request.post(options, function (error, response, body) {
+        if (!error) {
+          console.log('Task sheduled for group: ' + group._id);
+        }
+        else{
+          console.log('ERROR Task sheduled for group: ' + group._id);
+        }
+      });
+    })
+  });
 
-  //Do this for all groups
-    let options = {
-      uri: 'http://localhost:3000/api/tasks/reasign',
-      method: 'POST',
-      json: data.group
-    };
-    request.post(options, function (error, response, body) {
-      if (!error) {
-        console.log('Task sheduled for group: ' + groupId);
-      }
-      else{
-        console.log('ERROR Task sheduled for group: ' + groupId);
-      }
-    });
+
 
 });
 
