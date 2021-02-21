@@ -52,7 +52,7 @@ cron.schedule("59 23 * * SUN", function () {
         json: group
       };
       //Generate history
-      request.post(options, function (error, response, body) {
+      request(options, function (error, response, body) {
         if (!error) {
           console.log('Histories generated for group: ' + group._id);
           options = {
@@ -61,7 +61,7 @@ cron.schedule("59 23 * * SUN", function () {
             json: group
           };
           //Reasign task
-          request.post(options, function (error, response, body) {
+          request(options, function (error, response, body) {
             if (!error) {
               console.log('Task sheduled for group: ' + group._id);
             }

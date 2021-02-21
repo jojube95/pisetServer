@@ -26,9 +26,7 @@ router.get('/getByGroup:id', (req, res, next) => {
 });
 
 router.get('/getByUser:id', (req, res, next) => {
-  console.log(req.params)
   Task.findOne({ userId: req.params.id }).then(result =>{
-    console.log(result)
     res.status(200).json({
       message: "Success",
       task: result
@@ -73,7 +71,6 @@ router.post('/deleteFromGroup', (req, res, next) => {
 });
 
 router.post('/update', (req, res, next) => {
-  console.log(req.body)
   if(req.body.groupId != null){
     Task.updateOne({'_id': req.body.task._id}, {
       name: req.body.task.name,
@@ -92,11 +89,12 @@ router.post('/update', (req, res, next) => {
 });
 
 router.post('/reasign', async (req, res, next) => {
-  //Generate history
-  //Loop the current group subtasks and insert into history
+  //Reasign tasks
+  console.log('Reasign tasks for group: ' + req.body.group.name);
 
-  let users = await User.find({ groupId: req.body.groupId });
-  let tasks = await Task.find({ groupId: req.body.groupId });
+  //Loop the current group subtasks and insert into history
+  let users = await User.find({ groupId: req.body.group._id });
+  let tasks = await Task.find({ groupId: req.body.group._id });
 
   //Complete tasks array to users.length
   if(tasks.length < users.length){
@@ -105,11 +103,10 @@ router.post('/reasign', async (req, res, next) => {
     for (i; i >= 0; i--){
       tasks.push(null);
     }
-
   }
 
   //Get week number
-  let weekNumber = getWeekNumber();
+  let weekNumber = getWeekNumber(req.body.currentDate);
   //Loop the users array
   users.forEach(async (currentValue, index) => {
     //find the task using function findTask(weekNumber%users.length, currentUserIndex, arrayTaks);
@@ -117,7 +114,14 @@ router.post('/reasign', async (req, res, next) => {
 
     //Update the searched task userId on current user loop id
     await Task.updateOne({'_id': taskAux._id}, { $set: { userId: currentValue._id}});
+    //Update the subtask of the searched task
+    await Subtask.updateMany({'taskId': taskAux._id}, { $set: { userId: currentValue._id, userName: currentValue.name }});
+  })
+
+  await res.status(200).json({
+    message: "Success"
   });
+
 });
 
 function findTask(ciclo, userArrayIndex, tareas) {
@@ -125,8 +129,16 @@ function findTask(ciclo, userArrayIndex, tareas) {
   return tareas[remainder === 0 ? tareas.length - 1 : remainder - 1];
 }
 
-function getWeekNumber() {
-  let d = new Date();
+function getWeekNumber(currentDate) {
+  let d;
+
+  if(currentDate == undefined){
+    d = new Date();
+  }
+  else{
+    d = new Date(currentDate);
+  }
+
   // Copy date so don't modify original
   d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
   // Set to nearest Thursday: current date + 4 - current day number

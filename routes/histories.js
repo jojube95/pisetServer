@@ -49,27 +49,46 @@ router.post('/addHistory', (req, res, next) => {
 });
 
 router.post('/generate', async (req, res, next) => {
-    //Generate history
+    let dateIni;
+    let dateFin;
 
+    if(req.body.currentDate == undefined){
+        dateFin = new Date();
+    }
+    else{
+        dateFin = new Date(req.body.currentDate);
+    }
+    dateIni = new Date().setDate(dateFin.getDate() - 7);
+
+    //Generate history
+    console.log('Generate histories for group: ' + req.body.group.name);
     //Loop the current group subtasks and insert into history
-    Subtask.find({ groupId: req.body.groupId }, (err, subtasks) => {
+    Subtask.find({ groupId: req.body.group._id }, (err, subtasks) => {
         subtasks.forEach((subtask) => {
             new History({
-                subtaskId: subtasks.subtaskId,
-                subtaskName: subtasks.subtaskName,
-                subtaskPenalty: subtasks.subtaskPenalty,
-                subtaskDone: subtasks.subtaskDone,
-                userId: subtasks.userId,
+                subtaskId: subtask._id,
+                subtaskName: subtask.name,
+                subtaskPenalty: subtask.penalty,
+                subtaskDone: subtask.done,
+                userId: subtask.userId,
                 userName: subtask.userName,
-                groupId: req.body.groupId,
-                groupName: req.body.name,
-                dateIni: new Date() - 7,
-                dateFin: new Date(),
+                groupId: req.body.group._id,
+                groupName: req.body.group.name,
+                dateIni: dateIni,
+                dateFin: dateFin
             }).save();
+
         })
+    }).then(result => {
+        res.status(201).json({
+            message: 'Histories generated successfully',
+            result: result
+        });
+    }).catch(err => {
+        res.status(500).json({
+            error: err
+        });
     });
-
-
 });
 
 module.exports = router;
