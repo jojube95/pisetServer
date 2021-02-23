@@ -46,6 +46,19 @@ router.get('/getByGroup:id', (req, res, next) => {
   });
 });
 
+router.get('/getByEmail:mail', (req, res, next) => {
+  User.find({ mail: req.params.mail }).then(result =>{
+    res.status(200).json({
+      message: "Success",
+      users: result
+    });
+  }).catch(err => {
+    res.status(500).json({
+      error : err
+    })
+  });
+});
+
 router.post('/addUserToGroup', (req, res, next) => {
   User.updateOne({'_id': req.body.userId}, { $set: { groupId: req.body.groupId, groupName: req.body.groupName}}).then(result => {
     console.log(result);

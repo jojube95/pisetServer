@@ -10,11 +10,12 @@ module.exports = function(io) {
     return router;
 };
 
-router.get('/getInvitations', (req, res, next) => {
-    Invitation.findOne({ userId: req.params.id }).then(result =>{
+router.get('/getInvitations:id', (req, res, next) => {
+    console.log('getInvitations');
+    Invitation.find({ userId: req.params.id }).then(result =>{
         res.status(200).json({
             message: "Success",
-            task: result
+            invitations: result
         });
     }).catch(err => {
         res.status(500).json({
@@ -24,10 +25,11 @@ router.get('/getInvitations', (req, res, next) => {
 });
 
 router.post('/invite', (req, res, next) => {
-    const invitation = new Invitation({
-        userId: req.body.userId,
-        groupId: req.body.groupId,
-        groupName: req.body.groupName
+   const invitation = new Invitation({
+        senderMail: req.body.invitation.senderMail,
+        invitedUserId: req.body.invitation.invitedUserId,
+        invitedGroupId: req.body.invitation.invitedGroupId,
+        invitedGroupName: req.body.invitation.invitedGroupName,
     });
 
     invitation.save().then(result => {
@@ -44,9 +46,9 @@ router.post('/invite', (req, res, next) => {
 
 router.post('/accept', (req, res, next) => {
     User.updateOne(
-        {'_id': req.body.userId}, { $set: { groupId: req.body.groupId, groupName: req.body.groupName }
+        {'_id': req.body.invitation.userId}, { $set: { groupId: req.body.invitation.groupId, groupName: req.body.invitation.groupName }
     }).then(result => {
-        Invitation.deleteOne({'_id': req.body.id}).then(result => {
+        Invitation.deleteOne({'_id': req.body.invitation._id}).then(result => {
             res.status(201).json({
                 message: 'Invitation accepted successfully',
                 result: result
@@ -64,7 +66,7 @@ router.post('/accept', (req, res, next) => {
 });
 
 router.post('/decline', (req, res, next) => {
-    Invitation.deleteOne({'_id': req.body.id}).then(result => {
+    Invitation.deleteOne({'_id': req.body.invitation.id}).then(result => {
         res.status(201).json({
             message: 'Invitation deleted successfully',
             result: result
@@ -76,3 +78,4 @@ router.post('/decline', (req, res, next) => {
     });
 });
 
+module.exports = router;
