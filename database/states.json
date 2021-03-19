@@ -1,0 +1,27 @@
+[{
+  "_id": {
+    "$oid": "5fde502a9e491a29eca18000"
+  },
+  "name": "Pending",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fde502a9e491a29eca18001"
+  },
+  "name": "Doing",
+  "__v": 0
+}
+,{
+  "_id": {
+    "$oid": "5fde502a9e491a29eca18002"
+  },
+  "name": "Delivered",
+  "__v": 0
+}
+,{
+  "_id": {
+    "$oid": "5fde502a9e491a29eca18003"
+  },
+  "name": "Finished",
+  "__v": 0
+}]

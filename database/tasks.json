@@ -3,62 +3,153 @@
     "$oid": "5fde50579e491a29eca1453f"
   },
   "name": "Task1",
+  "description": "Task1Description",
   "groupId": "5fde502a9e491a29eca14528",
   "userId": "5fde50609e491a29eca14547",
   "userName": "User1",
+  "dateIni": {
+    "$date": "2020-09-29T16:35:19Z"
+  },
+  "dateEnd": {
+    "$date": "2020-10-02T16:35:19Z"
+  },
+  "state": {
+    "_id": {
+      "$oid": "5fde502a9e491a29eca18000"
+    },
+    "name": "Pending"
+  },
   "__v": 0
 },{
   "_id": {
     "$oid": "5fde50579e491a29eca14540"
   },
   "name": "Task2",
+  "description": "Task2Description",
   "groupId": "5fde502a9e491a29eca14528",
   "userId": "5fde50609e491a29eca14548",
   "userName": "User2",
+  "dateIni": {
+    "$date": "2020-11-29T16:35:19Z"
+  },
+  "dateEnd": {
+    "$date": "2020-12-01T16:35:19Z"
+  },
+  "state": {
+    "_id": {
+      "$oid": "5fde502a9e491a29eca18002"
+    },
+    "name": "Delivered"
+  },
   "__v": 0
 },{
   "_id": {
     "$oid": "5fde50579e491a29eca14541"
   },
   "name": "Task3",
+  "description": "Task3Description",
   "groupId": "5fde502a9e491a29eca14528",
   "userId": "5fde50609e491a29eca14549",
   "userName": "User3",
+  "dateIni": {
+    "$date": "2020-11-10T16:35:19Z"
+  },
+  "dateEnd": {
+    "$date": "2020-11-15T16:35:19Z"
+  },
+  "state": {
+    "_id": {
+      "$oid": "5fde502a9e491a29eca18000"
+    },
+    "name": "Pending"
+  },
   "__v": 0
 },{
   "_id": {
     "$oid": "5fde50579e491a29eca14542"
   },
   "name": "Task4",
+  "description": "Task4Description",
   "groupId": "5fde502a9e491a29eca14528",
   "userId": "5fde50609e491a29eca1454a",
   "userName": "User4",
+  "dateIni": {
+    "$date": "2020-10-28T16:35:19Z"
+  },
+  "dateEnd": {
+    "$date": "2020-11-01T16:35:19Z"
+  },
+  "state": {
+    "_id": {
+      "$oid": "5fde502a9e491a29eca18000"
+    },
+    "name": "Pending"
+  },
   "__v": 0
 },{
   "_id": {
     "$oid": "5fde50579e491a29eca14543"
   },
   "name": "Task5",
+  "description": "Task5Description",
   "groupId": "5fde502a9e491a29eca1452a",
   "userId": "5fde50609e491a29eca1454b",
   "userName": "User5",
+  "dateIni": {
+    "$date": "2020-10-30T16:35:19Z"
+  },
+  "dateEnd": {
+    "$date": "2020-11-06T16:35:19Z"
+  },
+  "state": {
+    "_id": {
+      "$oid": "5fde502a9e491a29eca18001"
+    },
+    "name": "Doing"
+  },
   "__v": 0
 },{
   "_id": {
     "$oid": "5fde50579e491a29eca14544"
   },
   "name": "Task6",
+  "description": "Task6Description",
   "groupId": "5fde502a9e491a29eca1452a",
   "userId": "5fde50609e491a29eca1454c",
   "userName": "User6",
+  "dateIni": {
+    "$date": "2020-11-26T16:35:19Z"
+  },
+  "dateEnd": {
+    "$date": "2020-12-05T16:35:19Z"
+  },
+  "state": {
+    "_id": {
+      "$oid": "5fde502a9e491a29eca18001"
+    },
+    "name": "Doing"
+  },
   "__v": 0
 },{
   "_id": {
     "$oid": "5fde50579e491a29eca14545"
   },
   "name": "Task7",
+  "description": "Task7Description",
   "groupId": "5fde502a9e491a29eca1452a",
   "userId": "5fde50609e491a29eca1454d",
   "userName": "User7",
+  "dateIni": {
+    "$date": "2020-11-28T16:35:19Z"
+  },
+  "dateEnd": {
+    "$date": "2020-12-06T16:35:19Z"
+  },
+  "state": {
+    "_id": {
+      "$oid": "5fde502a9e491a29eca18003"
+    },
+    "name": "Finished"
+  },
   "__v": 0
 }]

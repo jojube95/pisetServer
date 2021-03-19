@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const actionSchema = require ('../models/action').schema;
 
 const historySchema = mongoose.Schema({
     taskId: {type: String, required: true},
@@ -9,7 +8,8 @@ const historySchema = mongoose.Schema({
     groupId: {type: String, required: true},
     groupName: {type: String, required: true},
     date: {type: Date, required: true},
-    action: {type: actionSchema, required: true}
+    action: {type: String, required: true},
+    time: {type: Number, required: true},
 });
 
 module.exports = mongoose.model('History', historySchema);

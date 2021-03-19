@@ -1,0 +1,36 @@
+[{
+  "_id": {
+    "$oid": "5fde502a9e491a29eca16001"
+  },
+  "deviceId": "X1",
+  "userId": "5fde50609e491a29eca14546",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fde502a9e491a29eca16002"
+  },
+  "deviceId": "X2",
+  "userId": "5fde50609e491a29eca14546",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fde502a9e491a29eca16003"
+  },
+  "deviceId": "X3",
+  "userId": "5fde50609e491a29eca14547",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fde502a9e491a29eca16004"
+  },
+  "deviceId": "X4",
+  "userId": "5fde50609e491a29eca14548",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fde50609e491a29eca14549"
+  },
+  "deviceId": "X5",
+  "userId": "5fde50609e491a29eca1454b",
+  "__v": 0
+}]
