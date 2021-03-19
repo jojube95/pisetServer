@@ -3,7 +3,6 @@ const bodyParser = require("body-parser");
 const usersRoutes = require('./routes/users');
 const groupsRoutes = require('./routes/groups');
 const tasksRoutes = require('./routes/tasks');
-const subtasksRoutes = require('./routes/subtasks');
 const historiesRoutes = require('./routes/histories');
 const invitationsRoutes = require('./routes/invitations');
 const testRoutes = require('./routes/test');
@@ -84,8 +83,6 @@ app.use('/api/users', usersRoutes);
 app.use('/api/groups', groupsRoutes);
 
 app.use('/api/tasks', tasksRoutes);
-
-app.use('/api/subtasks', subtasksRoutes);
 
 app.use('/api/histories', historiesRoutes);
 
