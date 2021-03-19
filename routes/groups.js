@@ -4,7 +4,6 @@ const MODEL_PATH = '../models/';
 const Group = require(MODEL_PATH + 'group');
 const User = require(MODEL_PATH + 'user');
 const Task = require(MODEL_PATH + 'task');
-const Subtask = require(MODEL_PATH + 'subtask');
 const checkAuth = require('../middleware/check-auth');
 
 const router = express.Router();

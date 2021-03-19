@@ -2,7 +2,6 @@ const express = require('express');
 
 const MODEL_PATH = '../models/';
 const History = require(MODEL_PATH + 'history');
-const Subtask = require(MODEL_PATH + 'subtask');
 const checkAuth = require('../middleware/check-auth');
 
 const router = express.Router();

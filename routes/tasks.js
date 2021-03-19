@@ -2,7 +2,6 @@ const express = require('express');
 
 const MODEL_PATH = '../models/';
 const Task = require(MODEL_PATH + 'task');
-const Subtask = require(MODEL_PATH + 'subtask');
 const User = require(MODEL_PATH + 'user');
 const checkAuth = require('../middleware/check-auth');
 
