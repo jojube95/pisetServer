@@ -1,16 +1,15 @@
 const mongoose = require('mongoose');
+const actionSchema = require ('../models/action').schema;
 
 const historySchema = mongoose.Schema({
-    subtaskId: {type: String, required: true},
-    subtaskName: {type: String, required: true},
-    subtaskPenalty: {type: String, required: true},
-    subtaskDone: {type: Boolean, required: true},
+    taskId: {type: String, required: true},
+    taskName: {type: String, required: true},
     userId: {type: String, required: true},
     userName: {type: String, required: true},
     groupId: {type: String, required: true},
     groupName: {type: String, required: true},
-    dateIni: {type: Date, required: true},
-    dateFin: {type: Date, required: true}
+    date: {type: Date, required: true},
+    action: {type: actionSchema, required: true}
 });
 
 module.exports = mongoose.model('History', historySchema);

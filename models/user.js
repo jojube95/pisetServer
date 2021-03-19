@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const userGroupSchema = require ('../models/userGroup').schema;
+const userAchivementSchema = require ('../models/userAchivement').schema;
 
 const userSchema = mongoose.Schema({
   mail: { type: String, required: true},
@@ -6,10 +8,8 @@ const userSchema = mongoose.Schema({
   name: { type: String, required: true},
   secondName: { type: String, required: true},
   admin:  {type: Boolean, required: true},
-  groupAdmin:  {type: Boolean, required: true},
-  groupDealer:  {type: Boolean, required: true},
-  groupId:  {type: String, required: false},
-  groupName:  {type: String, required: false}
+  groups:  {type: [userGroupSchema], required: false},
+  achivements:  {type: [userAchivementSchema], required: false},
 });
 
 module.exports = mongoose.model('User', userSchema);
