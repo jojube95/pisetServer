@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
 
 const userAchivementSchema = mongoose.Schema({
-    idUser: {type: String, required: true},
     achivementId: {type: String, required: true},
+    achivementName: {type: String, required: true},
+    achivementDescription: {type: String, required: true},
+    achivementCompletePoints: {type: Number, required: true},
     currentPoints: {type: Number, required: true},
 });
 
