@@ -8,8 +8,8 @@
   "secondName": "Admin",
   "admin": true,
   "__v": 0,
-  "groups": null,
-  "achivements": null
+  "groups": [],
+  "achivements": []
 },{
   "_id": {
     "$oid": "5fde50609e491a29eca14547"
@@ -21,11 +21,11 @@
   "admin": false,
   "__v": 0,
   "groups": [{
-    "idGroup": "5fde502a9e491a29eca14528",
+    "groupId": "5fde502a9e491a29eca14528",
     "groupName": "Group1",
     "groupAdmin": true
   },
-  {"idGroup": "5fde502a9e491a29eca1452a",
+  {"groupId": "5fde502a9e491a29eca1452a",
     "groupName": "Group2",
     "groupAdmin": false
   }],
@@ -47,7 +47,7 @@
   "admin": false,
   "__v": 0,
   "groups": [{
-    "idGroup": "5fde502a9e491a29eca14528",
+    "groupId": "5fde502a9e491a29eca14528",
     "groupName": "Group1",
     "groupAdmin": false
   }],
@@ -75,7 +75,7 @@
   "admin": false,
   "__v": 0,
   "groups": [{
-    "idGroup": "5fde502a9e491a29eca14528",
+    "groupId": "5fde502a9e491a29eca14528",
     "groupName": "Group1",
     "groupAdmin": false
   }],
@@ -103,7 +103,7 @@
   "admin": false,
   "__v": 0,
   "groups": [{
-    "idGroup": "5fde502a9e491a29eca14528",
+    "groupId": "5fde502a9e491a29eca14528",
     "groupName": "Group1",
     "groupAdmin": false
   }],
@@ -131,7 +131,7 @@
   "admin": false,
   "__v": 0,
   "groups": [{
-    "idGroup": "5fde502a9e491a29eca1452a",
+    "groupId": "5fde502a9e491a29eca1452a",
     "groupName": "Group2",
     "groupAdmin": true
   }],
@@ -159,7 +159,7 @@
   "admin": false,
   "__v": 0,
   "groups": [{
-    "idGroup": "5fde502a9e491a29eca1452a",
+    "groupId": "5fde502a9e491a29eca1452a",
     "groupName": "Group2",
     "groupAdmin": false
   }],
@@ -181,7 +181,7 @@
   "admin": false,
   "__v": 0,
   "groups": [{
-    "idGroup": "5fde502a9e491a29eca1452a",
+    "groupId": "5fde502a9e491a29eca1452a",
     "groupName": "Group2",
     "groupAdmin": false
   }],

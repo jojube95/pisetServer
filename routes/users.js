@@ -1,10 +1,11 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const MODEL_PATH = '../models/';
 
-const User = require('../models/user');
-const History = require('../models/history');
-
+const User = require(MODEL_PATH + 'user');
+const History = require(MODEL_PATH + 'history');
+const Task = require(MODEL_PATH + 'task');
 const router = express.Router();
 
 router.get('/get', (req, res, next) => {
@@ -21,7 +22,7 @@ router.get('/get', (req, res, next) => {
 });
 
 router.get('/getWithoutGroup', (req, res, next) => {
-  User.find({ groupId: null }).then(result =>{
+  User.find({ groups: null }).then(result =>{
     res.status(200).json({
       message: "Success",
       users: result
@@ -34,12 +35,13 @@ router.get('/getWithoutGroup', (req, res, next) => {
 });
 
 router.get('/getByGroup:id', (req, res, next) => {
-  User.find({ groupId: req.params.id }).then(result =>{
+  User.find({groups: { $elemMatch: {groupId: req.params.id}}}).then(result =>{
     res.status(200).json({
       message: "Success",
       users: result
     });
   }).catch(err => {
+    console.log(err);
     res.status(500).json({
       error : err
     })
@@ -60,7 +62,9 @@ router.get('/getByEmail:mail', (req, res, next) => {
 });
 
 router.post('/addUserToGroup', (req, res, next) => {
-  User.updateOne({'_id': req.body.userId}, { $set: { groupId: req.body.groupId, groupName: req.body.groupName}}).then(result => {
+  let group = {groupId: req.body.groupId, groupName: req.body.groupName, groupAdmin: false};
+
+  User.updateOne({ _id: req.body.userId }, { $push: { groups: group}}).then(result => {
     console.log(result);
     res.status(200).json({
       message: 'User added to group successfully',
@@ -76,51 +80,64 @@ router.post('/addUserToGroup', (req, res, next) => {
 
 router.post('/deleteUserFromGroup', (req, res, next) => {
   console.log("Trying delete user from group");
-  User.updateOne({'_id': req.body.userId}, { $set: { groupId: null, groupName: null, groupAdmin: null, groupDealer: null}}).then(result => {
-    res.status(201).json({
-      message: 'User deleted from group successfully',
+
+  User.updateOne({ _id: req.body.userId }, { $pull: {groups: {groupId: req.body.groupId}}}).then(result => {
+    console.log(result);
+    res.status(200).json({
+      message: 'User added to group successfully',
       result: result
     });
-  }).catch(err => {
+    }).catch(err => {
     res.status(500).json({
       error: err
-
     });
-
   });
 });
 
 router.post('/update', async (req, res, next) => {
+  let hash = await bcrypt.hash(req.body.password, 10);
+
   let result = await User.updateOne({'_id': req.body._id}, {
     mail: req.body.mail,
-    password: req.body.password,
+    password: hash,
     name: req.body.name,
     secondName: req.body.secondName,
-    admin: req.body.admin,
-    groupAdmin: req.body.groupAdmin,
-    groupId: req.body.groupId || null
+    admin: req.body.admin
   });
 
   if(result){
     console.log('User updated successfully');
-    //Update penaltys name too
+    //Update histories user name
     let resultHistory = await History.updateMany({'userId': req.body._id}, {'$set':{'userName': req.body.name}});
 
     if(resultHistory){
       console.log('History user data updated successfully');
-      res.status(201).json({
-        message: 'User updated successfully',
-        result: result
-      });
+      //Update tasks user name
+      let resultTask = await Task.updateMany({'userId': req.body._id}, {'$set':{'userName': req.body.name}});
+
+      if(resultTask){
+        console.log('Task user data updated successfully');
+
+        res.status(201).json({
+          message: 'User updated successfully',
+          result: result
+        });
+      }
+      else{
+        resultTask.status(500).json({
+          error: err
+        });
+      }
+
     }
     else{
-      res.status(500).json({
+      resultHistory.status(500).json({
         error: err
       });
     }
   }
   else{
-    res.status(500).json({
+    result.status(500).json({
       error: err
     });
   }
@@ -135,7 +152,8 @@ router.post('/signup', (req, res, next) => {
       'name': req.body.name,
       'secondName': req.body.secondName,
       'admin': false,
-      'groupAdmin': false
+      'groups': [],
+      'achivements': []
     });
     user.save().then(result => {
       res.status(201).json({

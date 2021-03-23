@@ -4,6 +4,7 @@ const MODEL_PATH = '../models/';
 const Group = require(MODEL_PATH + 'group');
 const User = require(MODEL_PATH + 'user');
 const Task = require(MODEL_PATH + 'task');
+const History = require(MODEL_PATH + 'history');
 const checkAuth = require('../middleware/check-auth');
 
 const router = express.Router();
@@ -45,21 +46,23 @@ router.post('/add', (req, res, next) => {
 router.post('/delete', (req, res, next) => {
   console.log('Try to delete group to db');
 
+  User.updateMany({}, { $pull: {groups: {groupId: req.body.groupId}}}).then(res => {
+    console.log(res);
+  });
+
+  Task.deleteMany({ groupId: req.body.groupId}).then(res => {
+    console.log('Task group deleted');
+  });
+
+  History.deleteMany({ groupId: req.body.groupId}).then(res => {
+    console.log('Deleted group histories');
+  });
+
   Group.deleteOne({ _id: req.body.groupId }).then(result => {
+    console.log('Group deleted');
     res.status(200).json({ message: "Group deleted!" });
   });
-  
-  User.updateMany({ groupId: req.body.groupId }, { $set: { groupId : null } }).then(result => {
-    console.log('Try users set to null');
-  });
-  
-  Task.deleteMany({ groupId: req.body.groupId}).then(result => {
-    console.log('Try tasks delete');
-  });
-  
-  Subtask.deleteMany({ groupId: req.body.groupId}).then(result => {
-    console.log('Try subtask delete');
-  });
+
 });
 
 module.exports = router;

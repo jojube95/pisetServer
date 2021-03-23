@@ -22,11 +22,15 @@ router.get('/restoreDatabase:id', (req, res, next) => {
   exec(restoreProcess, (error, stdout, stderr) => {
     if (error) {
       console.log('error: ' + error.message);
-      return;
+      res.status(500).json({
+        error: error
+      });
     }
     if (stderr) {
       console.log('stderr: ' + stderr);
-      return;
+      res.status(201).json({
+        message: "Database restored"
+      });
     }
     console.log('stdout: ' + stdout);
   });
@@ -43,11 +47,15 @@ router.get('/exportDatabase:id', (req, res, next) => {
   exec(backupProcess, (error, stdout, stderr) => {
     if (error) {
       console.log('error: ' + error.message);
-      return;
+      res.status(500).json({
+        error: error
+      });
     }
     if (stderr) {
       console.log('stderr: ' + stderr);
-      return;
+      res.status(201).json({
+        message: "Database exported"
+      });
     }
     console.log('stdout: ' + stdout);
   });

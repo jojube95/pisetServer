@@ -66,7 +66,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"groupId\": \"60579f3f14123f21a89d2f0b\"\r\n}",
+							"raw": "{\r\n    \"groupId\": \"605a385b69e4f02a606432f8\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -93,7 +93,242 @@
 		},
 		{
 			"name": "users",
-			"item": []
+			"item": [
+				{
+					"name": "addUserToGroup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"5fde50609e491a29eca14547\", \r\n    \"groupId\": \"605a385b69e4f02a606432f8\", \r\n    \"groupName\": \"Group3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/addUserToGroup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"addUserToGroup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUserFromGroup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"5fde50609e491a29eca14548\", \r\n    \"groupId\": \"5fde502a9e491a29eca1452a\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/deleteUserFromGroup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"deleteUserFromGroup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"mail\": \"userNew@user.com\",\r\n    \"password\": \"useruser\",\r\n    \"name\": \"UserNew\",\r\n    \"secondName\": \"UserNew\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "signin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"mail\": \"user1@user.com\",\r\n    \"password\": \"useruser\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/signin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"5fde50609e491a29eca14547\",\r\n    \"mail\": \"user1@user.com\",\r\n    \"password\": \"useruser\",\r\n    \"name\": \"User1Edited\",\r\n    \"secondName\": \"User1Edited\",\r\n    \"admin\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/users/get",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByMail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/users/getByEmailuser1@user.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"getByEmailuser1@user.com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByGroup",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/users/getByGroup5fde502a9e491a29eca14528",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"getByGroup5fde502a9e491a29eca14528"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getWithoutGroup",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/users/getWithoutGroup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"getWithoutGroup"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "devices",
@@ -110,6 +345,32 @@
 		{
 			"name": "histories",
 			"item": []
+		},
+		{
+			"name": "test",
+			"item": [
+				{
+					"name": "restoreDatabase",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/test/restoreDatabasetest",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"test",
+								"restoreDatabasetest"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
