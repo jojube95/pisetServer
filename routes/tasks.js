@@ -40,7 +40,12 @@ router.get('/getByUser:id', (req, res, next) => {
 router.post('/addToGroup', (req, res, next) => {
   const task = new Task({
     name: req.body.task.name,
-    groupId: req.body.groupId
+    description: req.body.task.description,
+    groupId: req.body.task.groupId,
+    dateIni: req.body.task.dateIni,
+    dateEnd: req.body.task.dateEnd,
+    estimatedTime: req.body.task.estimatedTime,
+    state:  req.body.task.state
   });
 
   task.save().then(result => {
@@ -57,7 +62,6 @@ router.post('/addToGroup', (req, res, next) => {
 
 router.post('/deleteFromGroup', (req, res, next) => {
   Task.deleteOne({'_id': req.body.taskId}).then(result => {
-    Subtask.deleteMany({ taskId: req.body.taskId});
     res.status(201).json({
       message: 'Task deleted from group successfully',
       result: result
@@ -70,10 +74,14 @@ router.post('/deleteFromGroup', (req, res, next) => {
 });
 
 router.post('/update', (req, res, next) => {
-  if(req.body.groupId != null){
     Task.updateOne({'_id': req.body.task._id}, {
       name: req.body.task.name,
-      groupId: req.body.groupId || null
+      description: req.body.task.description,
+      groupId: req.body.task.groupId,
+      dateIni: req.body.task.dateIni,
+      dateEnd: req.body.task.dateEnd,
+      estimatedTime: req.body.task.estimatedTime,
+      state:  req.body.task.state
     }).then(result => {
       res.status(201).json({
         message: 'Task updated successfully',
@@ -84,7 +92,7 @@ router.post('/update', (req, res, next) => {
         error: err
       });
     });
-  }
+
 });
 
 router.post('/reasign', async (req, res, next) => {

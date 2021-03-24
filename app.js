@@ -6,6 +6,8 @@ const tasksRoutes = require('./routes/tasks');
 const historiesRoutes = require('./routes/histories');
 const invitationsRoutes = require('./routes/invitations');
 const devicesRoutes = require('./routes/devices');
+const achivementsRoutes = require('./routes/achivements');
+const statesRoutes = require('./routes/states');
 const testRoutes = require('./routes/test');
 const Group = require('./models/group');
 const cron = require('node-cron');
@@ -94,6 +96,10 @@ app.use('/api/history', historiesRoutes);
 app.use('/api/invitations', invitationsRoutes);
 
 app.use('/api/devices', devicesRoutes);
+
+app.use('/api/achivements', achivementsRoutes);
+
+app.use('/api/states', statesRoutes);
 
 module.exports = app;
 

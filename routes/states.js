@@ -1,19 +1,20 @@
 const express = require('express');
 
 const MODEL_PATH = '../models/';
-const checkAuth = require('../middleware/check-auth');
-const Device = require(MODEL_PATH + 'device');
+const State = require(MODEL_PATH + 'state');
+
 const router = express.Router();
 
 module.exports = function(io) {
     return router;
 };
 
-router.get('/getByUser:id', (req, res, next) => {
-    Device.find({ userId: req.params.id }).then(result =>{
+
+router.get('/get', (req, res, next) => {
+    State.find().then(result =>{
         res.status(200).json({
             message: "Success",
-            devices: result
+            states: result
         });
     }).catch(err => {
         res.status(500).json({

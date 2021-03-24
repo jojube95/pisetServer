@@ -24,15 +24,31 @@ router.get('/getByUser:id', (req, res, next) => {
 
 });
 
+router.get('/getByGroup:id', (req, res, next) => {
+    History.find({ groupId: req.params.id }).then(result =>{
+        res.status(200).json({
+            message: "Success",
+            histories: result
+        });
+    }).catch(err => {
+        res.status(500).json({
+            error : err
+        })
+    });
+
+});
+
 router.post('/addHistory', (req, res, next) => {
     const history = new History({
-        subtaskId: req.body.history.subtaskId,
-        subtaskName: req.body.history.subtaskName,
-        subtaskPenalty: req.body.history.subtaskPenalty,
-        subtaskDone: req.body.history.subtaskDone,
+        taskId: req.body.history.taskId,
+        taskName: req.body.history.taskName,
         userId: req.body.history.userId,
-        dateIni: req.body.history.dateIni,
-        dateFin: req.body.history.dateFin,
+        userName: req.body.history.userName,
+        groupId: req.body.history.groupId,
+        groupName: req.body.history.groupName,
+        date: req.body.history.date,
+        action: req.body.history.action,
+        time: req.body.history.time
     });
 
     history.save().then(result => {

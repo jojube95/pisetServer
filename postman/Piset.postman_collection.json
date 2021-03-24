@@ -332,19 +332,433 @@
 		},
 		{
 			"name": "devices",
-			"item": []
+			"item": [
+				{
+					"name": "getByUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/devices/getByUser5fde50609e491a29eca14546",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"devices",
+								"getByUser5fde50609e491a29eca14546"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "invitations",
-			"item": []
+			"item": [
+				{
+					"name": "getByGroup",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/invitations/getByGroup5fde502a9e491a29eca1452a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"invitations",
+								"getByGroup5fde502a9e491a29eca1452a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/invitations/getByUser5fde50609e491a29eca1454c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"invitations",
+								"getByUser5fde50609e491a29eca1454c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "invite",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"invitation\": {\r\n        \"groupId\": \"5fde502a9e491a29eca1452a\",\r\n        \"groupName\": \"Group2\",\r\n        \"userId\": \"5fde50609e491a29eca1454d\",\r\n        \"userName\": \"User7\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/invitations/invite",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"invitations",
+								"invite"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "accept",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"invitation\": {\r\n        \"groupId\": \"5fde502a9e491a29eca14528\",\r\n        \"groupName\": \"Group1\",\r\n        \"userId\": \"5fde50609e491a29eca1454d\",\r\n        \"userName\": \"User7\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/invitations/accept",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"invitations",
+								"accept"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "decline",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"invitation\": {\r\n        \"_id\": \"605b799b82ced735c0079a39\",\r\n        \"groupId\": \"5fde502a9e491a29eca1452a\",\r\n        \"userId\": \"5fde50609e491a29eca1454d\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/invitations/decline",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"invitations",
+								"decline"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "tasks",
-			"item": []
+			"item": [
+				{
+					"name": "getByGroup",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/tasks/getByGroup5fde502a9e491a29eca1452a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"tasks",
+								"getByGroup5fde502a9e491a29eca1452a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/tasks/getByUser5fde50609e491a29eca1454c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"tasks",
+								"getByUser5fde50609e491a29eca1454c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addToGroup",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var current_timestamp1 = new Date();\r",
+									"postman.setEnvironmentVariable(\"current_timestamp1\", current_timestamp1.toISOString());\r",
+									"\r",
+									"var current_timestamp2 = new Date();\r",
+									"postman.setEnvironmentVariable(\"current_timestamp2\", current_timestamp2.toISOString());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"task\":{\r\n        \"name\": \"Task8\",\r\n        \"description\": \"Task8 description\",\r\n        \"groupId\": \"5fde502a9e491a29eca14528\",\r\n        \"dateIni\": \"{{current_timestamp1}}\",\r\n        \"dateEnd\": \"{{current_timestamp2}}\",\r\n        \"estimatedTime\": 60,\r\n        \"state\":  \"ToDo\"        \r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/tasks/addToGroup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"tasks",
+								"addToGroup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var current_timestamp1 = new Date();\r",
+									"postman.setEnvironmentVariable(\"current_timestamp1\", current_timestamp1.toISOString());\r",
+									"\r",
+									"var current_timestamp2 = new Date();\r",
+									"postman.setEnvironmentVariable(\"current_timestamp2\", current_timestamp2.toISOString());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"task\":{\r\n        \"_id\": \"5fde50579e491a29eca14540\",\r\n        \"name\": \"Task2Edit\",\r\n        \"description\": \"Task2 description edit\",\r\n        \"groupId\": \"5fde502a9e491a29eca14528\",\r\n        \"dateIni\": \"{{current_timestamp1}}\",\r\n        \"dateEnd\": \"{{current_timestamp2}}\",\r\n        \"estimatedTime\": 32,\r\n        \"state\":  \"Doing\"        \r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/tasks/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"tasks",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteFromGroup",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"taskId\": \"5fde50579e491a29eca1453f\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/tasks/deleteFromGroup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"tasks",
+								"deleteFromGroup"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "histories",
-			"item": []
+			"item": [
+				{
+					"name": "getByGroup",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/histories/getByGroup5fde502a9e491a29eca1452a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"histories",
+								"getByGroup5fde502a9e491a29eca1452a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/histories/getByUser5fde50609e491a29eca1454c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"histories",
+								"getByUser5fde50609e491a29eca1454c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addHistory",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var current_timestamp = new Date();\r",
+									"postman.setEnvironmentVariable(\"current_timestamp\", current_timestamp.toISOString());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"history\": {\r\n        \"taskId\": \"5fde50579e491a29eca1453f\",\r\n        \"taskName\": \"Task1\",\r\n        \"userId\": \"5fde50609e491a29eca14547\",\r\n        \"userName\": \"User1\",\r\n        \"groupId\": \"5fde502a9e491a29eca14528\",\r\n        \"groupName\": \"Group1\",\r\n        \"date\": \"{{current_timestamp}}\",\r\n        \"action\": \"Finished\",\r\n        \"time\": 73\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/histories/addHistory",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"histories",
+								"addHistory"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "test",
@@ -365,6 +779,100 @@
 								"api",
 								"test",
 								"restoreDatabasetest"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "exportDatabase",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/test/exportDatabasetest",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"test",
+								"exportDatabasetest"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "achivements",
+			"item": [
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/achivements/get",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"achivements",
+								"get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/achivements/getByUser5fde50609e491a29eca14549",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"achivements",
+								"getByUser5fde50609e491a29eca14549"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "states",
+			"item": [
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/states/get",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"states",
+								"get"
 							]
 						}
 					},

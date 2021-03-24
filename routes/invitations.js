@@ -10,8 +10,20 @@ module.exports = function(io) {
     return router;
 };
 
-router.get('/getInvitations:id', (req, res, next) => {
-    console.log('getInvitations');
+router.get('/getByGroup:id', (req, res, next) => {
+    Invitation.find({ groupId: req.params.id }).then(result =>{
+        res.status(200).json({
+            message: "Success",
+            invitations: result
+        });
+    }).catch(err => {
+        res.status(500).json({
+            error : err
+        })
+    });
+});
+
+router.get('/getByUser:id', (req, res, next) => {
     Invitation.find({ userId: req.params.id }).then(result =>{
         res.status(200).json({
             message: "Success",
@@ -25,11 +37,11 @@ router.get('/getInvitations:id', (req, res, next) => {
 });
 
 router.post('/invite', (req, res, next) => {
-   const invitation = new Invitation({
-        senderMail: req.body.invitation.senderMail,
-        invitedUserId: req.body.invitation.invitedUserId,
-        invitedGroupId: req.body.invitation.invitedGroupId,
-        invitedGroupName: req.body.invitation.invitedGroupName,
+    const invitation = new Invitation({
+        groupId: req.body.invitation.groupId,
+        groupName: req.body.invitation.groupName,
+        userId: req.body.invitation.userId,
+        userName: req.body.invitation.userName,
     });
 
     invitation.save().then(result => {
@@ -45,9 +57,7 @@ router.post('/invite', (req, res, next) => {
 });
 
 router.post('/accept', (req, res, next) => {
-    User.updateOne(
-        {'_id': req.body.invitation.userId}, { $set: { groupId: req.body.invitation.groupId, groupName: req.body.invitation.groupName }
-    }).then(result => {
+    User.updateOne({ _id: req.body.invitation.userId }, { $push: {groups: {groupId: req.body.invitation.groupId, groupName: req.body.invitation.groupName, groupAdmin: false}}}).then(result => {
         Invitation.deleteOne({'_id': req.body.invitation._id}).then(result => {
             res.status(201).json({
                 message: 'Invitation accepted successfully',
@@ -58,6 +68,10 @@ router.post('/accept', (req, res, next) => {
                 error: err
             });
         });
+        res.status(200).json({
+            message: 'User added to group successfully',
+            result: result
+        });
     }).catch(err => {
         res.status(500).json({
             error: err
@@ -66,7 +80,7 @@ router.post('/accept', (req, res, next) => {
 });
 
 router.post('/decline', (req, res, next) => {
-    Invitation.deleteOne({'_id': req.body.invitation.id}).then(result => {
+    Invitation.deleteOne({'_id': req.body.invitation._id}).then(result => {
         res.status(201).json({
             message: 'Invitation deleted successfully',
             result: result
