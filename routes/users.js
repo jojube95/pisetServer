@@ -22,7 +22,7 @@ router.get('/get', (req, res, next) => {
 });
 
 router.get('/getWithoutGroup', (req, res, next) => {
-  User.find({ groups: null }).then(result =>{
+  User.find({ groups: [] }).then(result =>{
     res.status(200).json({
       message: "Success",
       users: result
@@ -49,10 +49,10 @@ router.get('/getByGroup:id', (req, res, next) => {
 });
 
 router.get('/getByEmail:mail', (req, res, next) => {
-  User.find({ mail: req.params.mail }).then(result =>{
+  User.findOne({ mail: req.params.mail }).then(result =>{
     res.status(200).json({
       message: "Success",
-      users: result
+      user: result
     });
   }).catch(err => {
     res.status(500).json({
@@ -66,9 +66,9 @@ router.post('/addUserToGroup', (req, res, next) => {
 
   User.updateOne({ _id: req.body.userId }, { $push: { groups: group}}).then(result => {
     console.log(result);
-    res.status(200).json({
-      message: 'User added to group successfully',
-      result: result
+    res.status(201).json({
+      message: 'Success',
+      res: result
     });
   }).catch(err => {
     res.status(500).json({
@@ -83,9 +83,9 @@ router.post('/deleteUserFromGroup', (req, res, next) => {
 
   User.updateOne({ _id: req.body.userId }, { $pull: {groups: {groupId: req.body.groupId}}}).then(result => {
     console.log(result);
-    res.status(200).json({
-      message: 'User added to group successfully',
-      result: result
+    res.status(201).json({
+      message: 'Success',
+      res: result
     });
     }).catch(err => {
     res.status(500).json({
@@ -119,8 +119,12 @@ router.post('/update', async (req, res, next) => {
         console.log('Task user data updated successfully');
 
         res.status(201).json({
-          message: 'User updated successfully',
-          result: result
+          message: 'Success',
+          res: {
+            "users": result,
+            "tasks": resultTask,
+            "histories": resultHistory
+          }
         });
       }
       else{
@@ -157,8 +161,8 @@ router.post('/signup', (req, res, next) => {
     });
     user.save().then(result => {
       res.status(201).json({
-        message: 'User registered successfully',
-        result: result
+        message: 'Success',
+        user: result
       });
     }).catch(err => {
       res.status(500).json({
@@ -197,7 +201,8 @@ router.post('/signin', (req, res, next) => {
         mail: fetchedUser.mail,
         userId: fetchedUser._id
       }, 'secret_this_should_be_longer', {expiresIn: '1h'});
-      res.status(200).json({
+      res.status(201).json({
+        message: 'Success',
         token: token,
         user: fetchedUser
       });

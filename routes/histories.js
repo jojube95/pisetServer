@@ -53,8 +53,8 @@ router.post('/addHistory', (req, res, next) => {
 
     history.save().then(result => {
         res.status(201).json({
-            message: 'History added successfully',
-            result: result
+            message: 'Success',
+            history: result
         });
     }).catch(err => {
         res.status(500).json({

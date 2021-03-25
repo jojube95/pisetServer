@@ -46,8 +46,8 @@ router.post('/invite', (req, res, next) => {
 
     invitation.save().then(result => {
         res.status(201).json({
-            message: 'Invitation added successfully',
-            result: result
+            message: 'Success',
+            invitation: result
         });
     }).catch(err => {
         res.status(500).json({
@@ -57,21 +57,21 @@ router.post('/invite', (req, res, next) => {
 });
 
 router.post('/accept', (req, res, next) => {
-    User.updateOne({ _id: req.body.invitation.userId }, { $push: {groups: {groupId: req.body.invitation.groupId, groupName: req.body.invitation.groupName, groupAdmin: false}}}).then(result => {
-        Invitation.deleteOne({'_id': req.body.invitation._id}).then(result => {
+    User.updateOne({ _id: req.body.invitation.userId }, { $push: {groups: {groupId: req.body.invitation.groupId, groupName: req.body.invitation.groupName, groupAdmin: false}}}).then(result1 => {
+        Invitation.deleteOne({'_id': req.body.invitation._id}).then(result2 => {
             res.status(201).json({
-                message: 'Invitation accepted successfully',
-                result: result
+                message: 'Success',
+                res: {
+                    user: result1,
+                    invitation: result2
+                }
             });
         }).catch(err => {
             res.status(500).json({
                 error: err
             });
         });
-        res.status(200).json({
-            message: 'User added to group successfully',
-            result: result
-        });
+
     }).catch(err => {
         res.status(500).json({
             error: err
@@ -82,8 +82,8 @@ router.post('/accept', (req, res, next) => {
 router.post('/decline', (req, res, next) => {
     Invitation.deleteOne({'_id': req.body.invitation._id}).then(result => {
         res.status(201).json({
-            message: 'Invitation deleted successfully',
-            result: result
+            message: 'Success',
+            res: result
         });
     }).catch(err => {
         res.status(500).json({

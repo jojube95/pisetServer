@@ -10,6 +10,57 @@
 			"item": [
 				{
 					"name": "get",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Respond should be json\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    var body = pm.response.json();\r",
+									"    pm.expect(body.message).to.eql(\"Success\");\r",
+									"\r",
+									"    pm.expect(body.groups.length).to.eql(2);\r",
+									"\r",
+									"    pm.expect(body.groups[0]).to.eql({\r",
+									"            \"_id\": \"5fde502a9e491a29eca14528\",\r",
+									"            \"name\": \"Group1\",\r",
+									"            \"__v\": 0\r",
+									"        });\r",
+									"    pm.expect(body.groups[1]).to.eql({\r",
+									"            \"_id\": \"5fde502a9e491a29eca1452a\",\r",
+									"            \"name\": \"Group2\",\r",
+									"            \"__v\": 0\r",
+									"        });\r",
+									"\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log('get');"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -31,6 +82,47 @@
 				},
 				{
 					"name": "add",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Respond should be json\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    var body = pm.response.json();\r",
+									"    pm.expect(body.message).to.eql(\"Success\");\r",
+									"\r",
+									"    pm.expect(body.group.name).to.eql(\"Group3\");\r",
+									"    \r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"\r",
+									"postman. setNextRequest('get');"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -61,12 +153,66 @@
 				},
 				{
 					"name": "delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Respond should be json\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    var body = pm.response.json();\r",
+									"    pm.expect(body.message).to.eql(\"Success\");\r",
+									"\r",
+									"    pm.expect(body.res.users).to.eql({\r",
+									"            \"n\": 8,\r",
+									"            \"nModified\": 4,\r",
+									"            \"ok\": 1\r",
+									"        });\r",
+									"\r",
+									"    pm.expect(body.res.tasks).to.eql({\r",
+									"            \"n\": 3,\r",
+									"            \"ok\": 1,\r",
+									"            \"deletedCount\": 3\r",
+									"        });\r",
+									"\r",
+									"    pm.expect(body.res.histories).to.eql({\r",
+									"            \"n\": 3,\r",
+									"            \"ok\": 1,\r",
+									"            \"deletedCount\": 3\r",
+									"        });\r",
+									"\r",
+									"    pm.expect(body.res.group).to.eql({\r",
+									"            \"n\": 1,\r",
+									"            \"ok\": 1,\r",
+									"            \"deletedCount\": 1\r",
+									"        });\r",
+									"\r",
+									"    pm.expect(body.groupId).to.eql(\"5fde502a9e491a29eca1452a\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"groupId\": \"605a385b69e4f02a606432f8\"\r\n}",
+							"raw": "{\r\n    \"groupId\": \"5fde502a9e491a29eca1452a\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -96,12 +242,46 @@
 			"item": [
 				{
 					"name": "addUserToGroup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Respond should be json\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    var body = pm.response.json();\r",
+									"    pm.expect(body.message).to.eql(\"Success\");\r",
+									"\r",
+									"    pm.expect(body.res).to.eql({\r",
+									"        \"n\": 1,\r",
+									"        \"nModified\": 1,\r",
+									"        \"ok\": 1\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userId\": \"5fde50609e491a29eca14547\", \r\n    \"groupId\": \"605a385b69e4f02a606432f8\", \r\n    \"groupName\": \"Group3\"\r\n}",
+							"raw": "{\r\n    \"userId\": \"5fde50609e491a29eca14548\", \r\n    \"groupId\": \"5fde502a9e491a29eca1452a\", \r\n    \"groupName\": \"Group2\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -126,12 +306,46 @@
 				},
 				{
 					"name": "deleteUserFromGroup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Respond should be json\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    var body = pm.response.json();\r",
+									"    pm.expect(body.message).to.eql(\"Success\");\r",
+									"\r",
+									"    pm.expect(body.res).to.eql({\r",
+									"        \"n\": 1,\r",
+									"        \"nModified\": 1,\r",
+									"        \"ok\": 1\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userId\": \"5fde50609e491a29eca14548\", \r\n    \"groupId\": \"5fde502a9e491a29eca1452a\"}",
+							"raw": "{\r\n    \"userId\": \"5fde50609e491a29eca14547\", \r\n    \"groupId\": \"5fde502a9e491a29eca1452a\"}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -156,6 +370,41 @@
 				},
 				{
 					"name": "signup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Respond should be json\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    var body = pm.response.json();\r",
+									"    pm.expect(body.message).to.eql(\"Success\");\r",
+									"\r",
+									"    pm.expect(body.user.mail).to.eql(\"userNew@user.com\");\r",
+									"    pm.expect(body.user.name).to.eql(\"UserNew\");\r",
+									"    pm.expect(body.user.secondName).to.eql(\"UserNew\");\r",
+									"    pm.expect(body.user.admin).to.eql(false);\r",
+									"    pm.expect(body.user.groups).to.eql([]);\r",
+									"    pm.expect(body.user.achivements).to.eql([]);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -186,6 +435,68 @@
 				},
 				{
 					"name": "signin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Respond should be json\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    var body = pm.response.json();\r",
+									"    pm.expect(body.message).to.eql(\"Success\");\r",
+									"\r",
+									"    pm.expect(body.token.length > 0).to.eql(true);\r",
+									"\r",
+									"    pm.expect(body.user).to.eql({\r",
+									"        \"_id\": \"5fde50609e491a29eca14547\",\r",
+									"        \"mail\": \"user1@user.com\",\r",
+									"        \"password\": \"$2b$10$0HqHTbfG6lSlwpFjXIfj0eQCge7EZDUA77cEj4/kWMqZiIpiXCwdi\",\r",
+									"        \"name\": \"User1\",\r",
+									"        \"secondName\": \"User1\",\r",
+									"        \"admin\": false,\r",
+									"        \"__v\": 0,\r",
+									"        \"groups\": [\r",
+									"            {\r",
+									"                \"groupId\": \"5fde502a9e491a29eca14528\",\r",
+									"                \"groupName\": \"Group1\",\r",
+									"                \"groupAdmin\": true\r",
+									"            },\r",
+									"            {\r",
+									"                \"groupId\": \"5fde502a9e491a29eca1452a\",\r",
+									"                \"groupName\": \"Group2\",\r",
+									"                \"groupAdmin\": false\r",
+									"            }\r",
+									"        ],\r",
+									"        \"achivements\": [\r",
+									"            {\r",
+									"                \"achivementId\": \"5fde502a9e491a29eca20004\",\r",
+									"                \"achivementName\": \"Create group\",\r",
+									"                \"achivementDescription\": \"Create group\",\r",
+									"                \"achivementCompletePoints\": 1,\r",
+									"                \"currentPoints\": 1\r",
+									"            }\r",
+									"        ]\r",
+									"    });\r",
+									"\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -216,6 +527,53 @@
 				},
 				{
 					"name": "update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Respond should be json\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    var body = pm.response.json();\r",
+									"    pm.expect(body.message).to.eql(\"Success\");\r",
+									"\r",
+									"    pm.expect(body.res.users).to.eql({\r",
+									"            \"n\": 1,\r",
+									"            \"nModified\": 1,\r",
+									"            \"ok\": 1\r",
+									"        });\r",
+									"\r",
+									"    pm.expect(body.res.tasks).to.eql({\r",
+									"            \"n\": 1,\r",
+									"            \"nModified\": 1,\r",
+									"            \"ok\": 1\r",
+									"        });\r",
+									"\r",
+									"    pm.expect(body.res.histories).to.eql({\r",
+									"            \"n\": 1,\r",
+									"            \"nModified\": 1,\r",
+									"            \"ok\": 1\r",
+									"        });\r",
+									"\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -246,6 +604,264 @@
 				},
 				{
 					"name": "get",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Respond should be json\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    var body = pm.response.json();\r",
+									"    pm.expect(body.message).to.eql(\"Success\");\r",
+									"\r",
+									"    pm.expect(body.users).to.eql([\r",
+									"        {\r",
+									"            \"_id\": \"5fde50609e491a29eca14546\",\r",
+									"            \"mail\": \"admin@admin.com\",\r",
+									"            \"password\": \"$2b$10$bSDt0f9x8ktE7PYdPdtsk.cj/koxxFlN/RGilbR6KD1JN3LUh3XN2\",\r",
+									"            \"name\": \"Admin\",\r",
+									"            \"secondName\": \"Admin\",\r",
+									"            \"admin\": true,\r",
+									"            \"__v\": 0,\r",
+									"            \"groups\": [],\r",
+									"            \"achivements\": []\r",
+									"        },\r",
+									"        {\r",
+									"            \"_id\": \"5fde50609e491a29eca14547\",\r",
+									"            \"mail\": \"user1@user.com\",\r",
+									"            \"password\": \"$2b$10$0HqHTbfG6lSlwpFjXIfj0eQCge7EZDUA77cEj4/kWMqZiIpiXCwdi\",\r",
+									"            \"name\": \"User1\",\r",
+									"            \"secondName\": \"User1\",\r",
+									"            \"admin\": false,\r",
+									"            \"__v\": 0,\r",
+									"            \"groups\": [\r",
+									"                {\r",
+									"                    \"groupId\": \"5fde502a9e491a29eca14528\",\r",
+									"                    \"groupName\": \"Group1\",\r",
+									"                    \"groupAdmin\": true\r",
+									"                },\r",
+									"                {\r",
+									"                    \"groupId\": \"5fde502a9e491a29eca1452a\",\r",
+									"                    \"groupName\": \"Group2\",\r",
+									"                    \"groupAdmin\": false\r",
+									"                }\r",
+									"            ],\r",
+									"            \"achivements\": [\r",
+									"                {\r",
+									"                    \"achivementId\": \"5fde502a9e491a29eca20004\",\r",
+									"                    \"achivementName\": \"Create group\",\r",
+									"                    \"achivementDescription\": \"Create group\",\r",
+									"                    \"achivementCompletePoints\": 1,\r",
+									"                    \"currentPoints\": 1\r",
+									"                }\r",
+									"            ]\r",
+									"        },\r",
+									"        {\r",
+									"            \"_id\": \"5fde50609e491a29eca14548\",\r",
+									"            \"mail\": \"user2@user.com\",\r",
+									"            \"password\": \"$2b$10$HX7y6VRdrrg36cxULkXJmelRLwhK2/MkIF9Lhu6KuWXZaRcodc8dS\",\r",
+									"            \"name\": \"User2\",\r",
+									"            \"secondName\": \"User2\",\r",
+									"            \"admin\": false,\r",
+									"            \"__v\": 0,\r",
+									"            \"groups\": [\r",
+									"                {\r",
+									"                    \"groupId\": \"5fde502a9e491a29eca14528\",\r",
+									"                    \"groupName\": \"Group1\",\r",
+									"                    \"groupAdmin\": false\r",
+									"                }\r",
+									"            ],\r",
+									"            \"achivements\": [\r",
+									"                {\r",
+									"                    \"achivementId\": \"5fde502a9e491a29eca20001\",\r",
+									"                    \"achivementName\": \"Task Completer 10\",\r",
+									"                    \"achivementDescription\": \"Complete 10 Tasks\",\r",
+									"                    \"achivementCompletePoints\": 10,\r",
+									"                    \"currentPoints\": 9\r",
+									"                },\r",
+									"                {\r",
+									"                    \"achivementId\": \"5fde502a9e491a29eca20002\",\r",
+									"                    \"achivementName\": \"Task Completer 100\",\r",
+									"                    \"achivementDescription\": \"Complete 100 Tasks\",\r",
+									"                    \"achivementCompletePoints\": 100,\r",
+									"                    \"currentPoints\": 9\r",
+									"                }\r",
+									"            ]\r",
+									"        },\r",
+									"        {\r",
+									"            \"_id\": \"5fde50609e491a29eca14549\",\r",
+									"            \"mail\": \"user3@user.com\",\r",
+									"            \"password\": \"$2b$10$seZlCzm9ikwvkQs/6xLH7eojNY2vMT/5IcPeqxj95.gqP/.OB6qca\",\r",
+									"            \"name\": \"User3\",\r",
+									"            \"secondName\": \"User3\",\r",
+									"            \"admin\": false,\r",
+									"            \"__v\": 0,\r",
+									"            \"groups\": [\r",
+									"                {\r",
+									"                    \"groupId\": \"5fde502a9e491a29eca14528\",\r",
+									"                    \"groupName\": \"Group1\",\r",
+									"                    \"groupAdmin\": false\r",
+									"                }\r",
+									"            ],\r",
+									"            \"achivements\": [\r",
+									"                {\r",
+									"                    \"achivementId\": \"5fde502a9e491a29eca20001\",\r",
+									"                    \"achivementName\": \"Task Completer 10\",\r",
+									"                    \"achivementDescription\": \"Complete 10 Tasks\",\r",
+									"                    \"achivementCompletePoints\": 10,\r",
+									"                    \"currentPoints\": 10\r",
+									"                },\r",
+									"                {\r",
+									"                    \"achivementId\": \"5fde502a9e491a29eca20002\",\r",
+									"                    \"achivementName\": \"Task Completer 100\",\r",
+									"                    \"achivementDescription\": \"Complete 100 Tasks\",\r",
+									"                    \"achivementCompletePoints\": 100,\r",
+									"                    \"currentPoints\": 10\r",
+									"                }\r",
+									"            ]\r",
+									"        },\r",
+									"        {\r",
+									"            \"_id\": \"5fde50609e491a29eca1454a\",\r",
+									"            \"mail\": \"user4@user.com\",\r",
+									"            \"password\": \"$2b$10$moCoPvFUlqL2Yv9uNcg7m.MHSr4fk5vwFjwY0exzz0ehUmU5u9bP6\",\r",
+									"            \"name\": \"User4\",\r",
+									"            \"secondName\": \"User4\",\r",
+									"            \"admin\": false,\r",
+									"            \"__v\": 0,\r",
+									"            \"groups\": [\r",
+									"                {\r",
+									"                    \"groupId\": \"5fde502a9e491a29eca14528\",\r",
+									"                    \"groupName\": \"Group1\",\r",
+									"                    \"groupAdmin\": false\r",
+									"                }\r",
+									"            ],\r",
+									"            \"achivements\": [\r",
+									"                {\r",
+									"                    \"achivementId\": \"5fde502a9e491a29eca20001\",\r",
+									"                    \"achivementName\": \"Task Completer 10\",\r",
+									"                    \"achivementDescription\": \"Complete 10 Tasks\",\r",
+									"                    \"achivementCompletePoints\": 10,\r",
+									"                    \"currentPoints\": 10\r",
+									"                },\r",
+									"                {\r",
+									"                    \"achivementId\": \"5fde502a9e491a29eca20002\",\r",
+									"                    \"achivementName\": \"Task Completer 100\",\r",
+									"                    \"achivementDescription\": \"Complete 100 Tasks\",\r",
+									"                    \"achivementCompletePoints\": 100,\r",
+									"                    \"currentPoints\": 20\r",
+									"                }\r",
+									"            ]\r",
+									"        },\r",
+									"        {\r",
+									"            \"_id\": \"5fde50609e491a29eca1454b\",\r",
+									"            \"mail\": \"user5@user.com\",\r",
+									"            \"password\": \"$2b$10$moCoPvFUlqL2Yv9uNcg7m.MHSr4fk5vwFjwY0exzz0ehUmU5u9bP6\",\r",
+									"            \"name\": \"User5\",\r",
+									"            \"secondName\": \"User5\",\r",
+									"            \"admin\": false,\r",
+									"            \"__v\": 0,\r",
+									"            \"groups\": [\r",
+									"                {\r",
+									"                    \"groupId\": \"5fde502a9e491a29eca1452a\",\r",
+									"                    \"groupName\": \"Group2\",\r",
+									"                    \"groupAdmin\": true\r",
+									"                }\r",
+									"            ],\r",
+									"            \"achivements\": [\r",
+									"                {\r",
+									"                    \"achivementId\": \"5fde502a9e491a29eca20001\",\r",
+									"                    \"achivementName\": \"Task Completer 10\",\r",
+									"                    \"achivementDescription\": \"Complete 10 Tasks\",\r",
+									"                    \"achivementCompletePoints\": 10,\r",
+									"                    \"currentPoints\": 10\r",
+									"                },\r",
+									"                {\r",
+									"                    \"achivementId\": \"5fde502a9e491a29eca20002\",\r",
+									"                    \"achivementName\": \"Task Completer 100\",\r",
+									"                    \"achivementDescription\": \"Complete 100 Tasks\",\r",
+									"                    \"achivementCompletePoints\": 100,\r",
+									"                    \"currentPoints\": 20\r",
+									"                }\r",
+									"            ]\r",
+									"        },\r",
+									"        {\r",
+									"            \"_id\": \"5fde50609e491a29eca1454c\",\r",
+									"            \"mail\": \"user6@user.com\",\r",
+									"            \"password\": \"$2b$10$moCoPvFUlqL2Yv9uNcg7m.MHSr4fk5vwFjwY0exzz0ehUmU5u9bP6\",\r",
+									"            \"name\": \"User6\",\r",
+									"            \"secondName\": \"User6\",\r",
+									"            \"admin\": false,\r",
+									"            \"__v\": 0,\r",
+									"            \"groups\": [\r",
+									"                {\r",
+									"                    \"groupId\": \"5fde502a9e491a29eca1452a\",\r",
+									"                    \"groupName\": \"Group2\",\r",
+									"                    \"groupAdmin\": false\r",
+									"                }\r",
+									"            ],\r",
+									"            \"achivements\": [\r",
+									"                {\r",
+									"                    \"achivementId\": \"5fde502a9e491a29eca20003\",\r",
+									"                    \"achivementName\": \"Accept invitation\",\r",
+									"                    \"achivementDescription\": \"Accept group invitation\",\r",
+									"                    \"achivementCompletePoints\": 1,\r",
+									"                    \"currentPoints\": 1\r",
+									"                }\r",
+									"            ]\r",
+									"        },\r",
+									"        {\r",
+									"            \"_id\": \"5fde50609e491a29eca1454d\",\r",
+									"            \"mail\": \"user7@user.com\",\r",
+									"            \"password\": \"$2b$10$moCoPvFUlqL2Yv9uNcg7m.MHSr4fk5vwFjwY0exzz0ehUmU5u9bP6\",\r",
+									"            \"name\": \"User7\",\r",
+									"            \"secondName\": \"User7\",\r",
+									"            \"admin\": false,\r",
+									"            \"__v\": 0,\r",
+									"            \"groups\": [\r",
+									"                {\r",
+									"                    \"groupId\": \"5fde502a9e491a29eca1452a\",\r",
+									"                    \"groupName\": \"Group2\",\r",
+									"                    \"groupAdmin\": false\r",
+									"                }\r",
+									"            ],\r",
+									"            \"achivements\": [\r",
+									"                {\r",
+									"                    \"achivementId\": \"5fde502a9e491a29eca20001\",\r",
+									"                    \"achivementName\": \"Task Completer 10\",\r",
+									"                    \"achivementDescription\": \"Complete 10 Tasks\",\r",
+									"                    \"achivementCompletePoints\": 10,\r",
+									"                    \"currentPoints\": 10\r",
+									"                },\r",
+									"                {\r",
+									"                    \"achivementId\": \"5fde502a9e491a29eca20002\",\r",
+									"                    \"achivementName\": \"Task Completer 100\",\r",
+									"                    \"achivementDescription\": \"Complete 100 Tasks\",\r",
+									"                    \"achivementCompletePoints\": 100,\r",
+									"                    \"currentPoints\": 20\r",
+									"                }\r",
+									"            ]\r",
+									"        }\r",
+									"    ]);\r",
+									"\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -267,6 +883,66 @@
 				},
 				{
 					"name": "getByMail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Respond should be json\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    var body = pm.response.json();\r",
+									"    pm.expect(body.message).to.eql(\"Success\");\r",
+									"\r",
+									"    pm.expect(body.user).to.eql({\r",
+									"        \"_id\": \"5fde50609e491a29eca14547\",\r",
+									"        \"mail\": \"user1@user.com\",\r",
+									"        \"password\": \"$2b$10$0HqHTbfG6lSlwpFjXIfj0eQCge7EZDUA77cEj4/kWMqZiIpiXCwdi\",\r",
+									"        \"name\": \"User1\",\r",
+									"        \"secondName\": \"User1\",\r",
+									"        \"admin\": false,\r",
+									"        \"__v\": 0,\r",
+									"        \"groups\": [\r",
+									"            {\r",
+									"                \"groupId\": \"5fde502a9e491a29eca14528\",\r",
+									"                \"groupName\": \"Group1\",\r",
+									"                \"groupAdmin\": true\r",
+									"            },\r",
+									"            {\r",
+									"                \"groupId\": \"5fde502a9e491a29eca1452a\",\r",
+									"                \"groupName\": \"Group2\",\r",
+									"                \"groupAdmin\": false\r",
+									"            }\r",
+									"        ],\r",
+									"        \"achivements\": [\r",
+									"            {\r",
+									"                \"achivementId\": \"5fde502a9e491a29eca20004\",\r",
+									"                \"achivementName\": \"Create group\",\r",
+									"                \"achivementDescription\": \"Create group\",\r",
+									"                \"achivementCompletePoints\": 1,\r",
+									"                \"currentPoints\": 1\r",
+									"            }\r",
+									"        ]\r",
+									"    });\r",
+									"\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -288,6 +964,164 @@
 				},
 				{
 					"name": "getByGroup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Respond should be json\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    var body = pm.response.json();\r",
+									"    pm.expect(body.message).to.eql(\"Success\");\r",
+									"\r",
+									"    pm.expect(body.users).to.eql([\r",
+									"        {\r",
+									"            \"_id\": \"5fde50609e491a29eca14547\",\r",
+									"            \"mail\": \"user1@user.com\",\r",
+									"            \"password\": \"$2b$10$0HqHTbfG6lSlwpFjXIfj0eQCge7EZDUA77cEj4/kWMqZiIpiXCwdi\",\r",
+									"            \"name\": \"User1\",\r",
+									"            \"secondName\": \"User1\",\r",
+									"            \"admin\": false,\r",
+									"            \"__v\": 0,\r",
+									"            \"groups\": [\r",
+									"                {\r",
+									"                    \"groupId\": \"5fde502a9e491a29eca14528\",\r",
+									"                    \"groupName\": \"Group1\",\r",
+									"                    \"groupAdmin\": true\r",
+									"                },\r",
+									"                {\r",
+									"                    \"groupId\": \"5fde502a9e491a29eca1452a\",\r",
+									"                    \"groupName\": \"Group2\",\r",
+									"                    \"groupAdmin\": false\r",
+									"                }\r",
+									"            ],\r",
+									"            \"achivements\": [\r",
+									"                {\r",
+									"                    \"achivementId\": \"5fde502a9e491a29eca20004\",\r",
+									"                    \"achivementName\": \"Create group\",\r",
+									"                    \"achivementDescription\": \"Create group\",\r",
+									"                    \"achivementCompletePoints\": 1,\r",
+									"                    \"currentPoints\": 1\r",
+									"                }\r",
+									"            ]\r",
+									"        },\r",
+									"        {\r",
+									"            \"_id\": \"5fde50609e491a29eca14548\",\r",
+									"            \"mail\": \"user2@user.com\",\r",
+									"            \"password\": \"$2b$10$HX7y6VRdrrg36cxULkXJmelRLwhK2/MkIF9Lhu6KuWXZaRcodc8dS\",\r",
+									"            \"name\": \"User2\",\r",
+									"            \"secondName\": \"User2\",\r",
+									"            \"admin\": false,\r",
+									"            \"__v\": 0,\r",
+									"            \"groups\": [\r",
+									"                {\r",
+									"                    \"groupId\": \"5fde502a9e491a29eca14528\",\r",
+									"                    \"groupName\": \"Group1\",\r",
+									"                    \"groupAdmin\": false\r",
+									"                }\r",
+									"            ],\r",
+									"            \"achivements\": [\r",
+									"                {\r",
+									"                    \"achivementId\": \"5fde502a9e491a29eca20001\",\r",
+									"                    \"achivementName\": \"Task Completer 10\",\r",
+									"                    \"achivementDescription\": \"Complete 10 Tasks\",\r",
+									"                    \"achivementCompletePoints\": 10,\r",
+									"                    \"currentPoints\": 9\r",
+									"                },\r",
+									"                {\r",
+									"                    \"achivementId\": \"5fde502a9e491a29eca20002\",\r",
+									"                    \"achivementName\": \"Task Completer 100\",\r",
+									"                    \"achivementDescription\": \"Complete 100 Tasks\",\r",
+									"                    \"achivementCompletePoints\": 100,\r",
+									"                    \"currentPoints\": 9\r",
+									"                }\r",
+									"            ]\r",
+									"        },\r",
+									"        {\r",
+									"            \"_id\": \"5fde50609e491a29eca14549\",\r",
+									"            \"mail\": \"user3@user.com\",\r",
+									"            \"password\": \"$2b$10$seZlCzm9ikwvkQs/6xLH7eojNY2vMT/5IcPeqxj95.gqP/.OB6qca\",\r",
+									"            \"name\": \"User3\",\r",
+									"            \"secondName\": \"User3\",\r",
+									"            \"admin\": false,\r",
+									"            \"__v\": 0,\r",
+									"            \"groups\": [\r",
+									"                {\r",
+									"                    \"groupId\": \"5fde502a9e491a29eca14528\",\r",
+									"                    \"groupName\": \"Group1\",\r",
+									"                    \"groupAdmin\": false\r",
+									"                }\r",
+									"            ],\r",
+									"            \"achivements\": [\r",
+									"                {\r",
+									"                    \"achivementId\": \"5fde502a9e491a29eca20001\",\r",
+									"                    \"achivementName\": \"Task Completer 10\",\r",
+									"                    \"achivementDescription\": \"Complete 10 Tasks\",\r",
+									"                    \"achivementCompletePoints\": 10,\r",
+									"                    \"currentPoints\": 10\r",
+									"                },\r",
+									"                {\r",
+									"                    \"achivementId\": \"5fde502a9e491a29eca20002\",\r",
+									"                    \"achivementName\": \"Task Completer 100\",\r",
+									"                    \"achivementDescription\": \"Complete 100 Tasks\",\r",
+									"                    \"achivementCompletePoints\": 100,\r",
+									"                    \"currentPoints\": 10\r",
+									"                }\r",
+									"            ]\r",
+									"        },\r",
+									"        {\r",
+									"            \"_id\": \"5fde50609e491a29eca1454a\",\r",
+									"            \"mail\": \"user4@user.com\",\r",
+									"            \"password\": \"$2b$10$moCoPvFUlqL2Yv9uNcg7m.MHSr4fk5vwFjwY0exzz0ehUmU5u9bP6\",\r",
+									"            \"name\": \"User4\",\r",
+									"            \"secondName\": \"User4\",\r",
+									"            \"admin\": false,\r",
+									"            \"__v\": 0,\r",
+									"            \"groups\": [\r",
+									"                {\r",
+									"                    \"groupId\": \"5fde502a9e491a29eca14528\",\r",
+									"                    \"groupName\": \"Group1\",\r",
+									"                    \"groupAdmin\": false\r",
+									"                }\r",
+									"            ],\r",
+									"            \"achivements\": [\r",
+									"                {\r",
+									"                    \"achivementId\": \"5fde502a9e491a29eca20001\",\r",
+									"                    \"achivementName\": \"Task Completer 10\",\r",
+									"                    \"achivementDescription\": \"Complete 10 Tasks\",\r",
+									"                    \"achivementCompletePoints\": 10,\r",
+									"                    \"currentPoints\": 10\r",
+									"                },\r",
+									"                {\r",
+									"                    \"achivementId\": \"5fde502a9e491a29eca20002\",\r",
+									"                    \"achivementName\": \"Task Completer 100\",\r",
+									"                    \"achivementDescription\": \"Complete 100 Tasks\",\r",
+									"                    \"achivementCompletePoints\": 100,\r",
+									"                    \"currentPoints\": 20\r",
+									"                }\r",
+									"            ]\r",
+									"        }\r",
+									"    ]);\r",
+									"\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -309,6 +1143,49 @@
 				},
 				{
 					"name": "getWithoutGroup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Respond should be json\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    var body = pm.response.json();\r",
+									"    pm.expect(body.message).to.eql(\"Success\");\r",
+									"\r",
+									"    pm.expect(body.users).to.eql([\r",
+									"        {\r",
+									"            \"_id\": \"5fde50609e491a29eca14546\",\r",
+									"            \"mail\": \"admin@admin.com\",\r",
+									"            \"password\": \"$2b$10$bSDt0f9x8ktE7PYdPdtsk.cj/koxxFlN/RGilbR6KD1JN3LUh3XN2\",\r",
+									"            \"name\": \"Admin\",\r",
+									"            \"secondName\": \"Admin\",\r",
+									"            \"admin\": true,\r",
+									"            \"__v\": 0,\r",
+									"            \"groups\": [],\r",
+									"            \"achivements\": []\r",
+									"        }\r",
+									"    ]);\r",
+									"\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -335,6 +1212,50 @@
 			"item": [
 				{
 					"name": "getByUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Respond should be json\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    var body = pm.response.json();\r",
+									"    pm.expect(body.message).to.eql(\"Success\");\r",
+									"\r",
+									"    pm.expect(body.devices).to.eql([\r",
+									"        {\r",
+									"            \"_id\": \"5fde502a9e491a29eca16001\",\r",
+									"            \"deviceId\": \"X1\",\r",
+									"            \"userId\": \"5fde50609e491a29eca14546\",\r",
+									"            \"__v\": 0\r",
+									"        },\r",
+									"        {\r",
+									"            \"_id\": \"5fde502a9e491a29eca16002\",\r",
+									"            \"deviceId\": \"X2\",\r",
+									"            \"userId\": \"5fde50609e491a29eca14546\",\r",
+									"            \"__v\": 0\r",
+									"        }\r",
+									"    ]);\r",
+									"\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -361,6 +1282,56 @@
 			"item": [
 				{
 					"name": "getByGroup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Respond should be json\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    var body = pm.response.json();\r",
+									"    pm.expect(body.message).to.eql(\"Success\");\r",
+									"\r",
+									"    pm.expect(body.invitations).to.eql([\r",
+									"        {\r",
+									"            \"_id\": \"5fde502a9e491a29eca17001\",\r",
+									"            \"groupId\": \"5fde502a9e491a29eca1452a\",\r",
+									"            \"userId\": \"5fde50609e491a29eca1454b\",\r",
+									"            \"__v\": 0\r",
+									"        },\r",
+									"        {\r",
+									"            \"_id\": \"5fde502a9e491a29eca17002\",\r",
+									"            \"groupId\": \"5fde502a9e491a29eca1452a\",\r",
+									"            \"userId\": \"5fde50609e491a29eca1454c\",\r",
+									"            \"__v\": 0\r",
+									"        },\r",
+									"        {\r",
+									"            \"_id\": \"5fde502a9e491a29eca17003\",\r",
+									"            \"groupId\": \"5fde502a9e491a29eca1452a\",\r",
+									"            \"userId\": \"5fde50609e491a29eca1454d\",\r",
+									"            \"__v\": 0\r",
+									"        }\r",
+									"    ]);\r",
+									"\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -382,6 +1353,44 @@
 				},
 				{
 					"name": "getByUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Respond should be json\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    var body = pm.response.json();\r",
+									"    pm.expect(body.message).to.eql(\"Success\");\r",
+									"\r",
+									"    pm.expect(body.invitations).to.eql([\r",
+									"        {\r",
+									"            \"_id\": \"5fde502a9e491a29eca17002\",\r",
+									"            \"groupId\": \"5fde502a9e491a29eca1452a\",\r",
+									"            \"userId\": \"5fde50609e491a29eca1454c\",\r",
+									"            \"__v\": 0\r",
+									"        }\r",
+									"    ]);\r",
+									"\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -403,6 +1412,40 @@
 				},
 				{
 					"name": "invite",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Respond should be json\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    var body = pm.response.json();\r",
+									"    pm.expect(body.message).to.eql(\"Success\");\r",
+									"\r",
+									"    pm.expect(body.invitation.groupId).to.eql(\"5fde502a9e491a29eca1452a\");\r",
+									"    pm.expect(body.invitation.groupName).to.eql(\"Group2\");\r",
+									"    pm.expect(body.invitation.userId).to.eql(\"5fde50609e491a29eca1454d\");\r",
+									"    pm.expect(body.invitation.userName).to.eql(\"User7\");\r",
+									"\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -433,6 +1476,47 @@
 				},
 				{
 					"name": "accept",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Respond should be json\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    var body = pm.response.json();\r",
+									"    pm.expect(body.message).to.eql(\"Success\");\r",
+									"\r",
+									"    pm.expect(body.res.user).to.eql({\r",
+									"            \"n\": 1,\r",
+									"            \"nModified\": 1,\r",
+									"            \"ok\": 1\r",
+									"        });\r",
+									"\r",
+									"    pm.expect(body.res.invitation).to.eql({\r",
+									"            \"n\": 0,\r",
+									"            \"ok\": 1,\r",
+									"            \"deletedCount\": 0\r",
+									"        });\r",
+									"\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -463,12 +1547,47 @@
 				},
 				{
 					"name": "decline",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Respond should be json\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    var body = pm.response.json();\r",
+									"    pm.expect(body.message).to.eql(\"Success\");\r",
+									"\r",
+									"    pm.expect(body.res).to.eql({\r",
+									"        \"n\": 1,\r",
+									"        \"ok\": 1,\r",
+									"        \"deletedCount\": 1\r",
+									"    });\r",
+									"\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"invitation\": {\r\n        \"_id\": \"605b799b82ced735c0079a39\",\r\n        \"groupId\": \"5fde502a9e491a29eca1452a\",\r\n        \"userId\": \"5fde50609e491a29eca1454d\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"invitation\": {\r\n        \"_id\": \"5fde502a9e491a29eca17001\",\r\n        \"groupId\": \"5fde502a9e491a29eca1452a\",\r\n        \"userId\": \"5fde50609e491a29eca1454d\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -498,6 +1617,70 @@
 			"item": [
 				{
 					"name": "getByGroup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Respond should be json\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    var body = pm.response.json();\r",
+									"    pm.expect(body.message).to.eql(\"Success\");\r",
+									"\r",
+									"    pm.expect(body.tasks).to.eql([\r",
+									"        {\r",
+									"            \"_id\": \"5fde50579e491a29eca14543\",\r",
+									"            \"name\": \"Task5\",\r",
+									"            \"description\": \"Task5Description\",\r",
+									"            \"groupId\": \"5fde502a9e491a29eca1452a\",\r",
+									"            \"userId\": \"5fde50609e491a29eca1454b\",\r",
+									"            \"userName\": \"User5\",\r",
+									"            \"dateIni\": \"2020-10-30T16:35:19.000Z\",\r",
+									"            \"dateEnd\": \"2020-11-06T16:35:19.000Z\",\r",
+									"            \"__v\": 0\r",
+									"        },\r",
+									"        {\r",
+									"            \"_id\": \"5fde50579e491a29eca14544\",\r",
+									"            \"name\": \"Task6\",\r",
+									"            \"description\": \"Task6Description\",\r",
+									"            \"groupId\": \"5fde502a9e491a29eca1452a\",\r",
+									"            \"userId\": \"5fde50609e491a29eca1454c\",\r",
+									"            \"userName\": \"User6\",\r",
+									"            \"dateIni\": \"2020-11-26T16:35:19.000Z\",\r",
+									"            \"dateEnd\": \"2020-12-05T16:35:19.000Z\",\r",
+									"            \"__v\": 0\r",
+									"        },\r",
+									"        {\r",
+									"            \"_id\": \"5fde50579e491a29eca14545\",\r",
+									"            \"name\": \"Task7\",\r",
+									"            \"description\": \"Task7Description\",\r",
+									"            \"groupId\": \"5fde502a9e491a29eca1452a\",\r",
+									"            \"userId\": \"5fde50609e491a29eca1454d\",\r",
+									"            \"userName\": \"User7\",\r",
+									"            \"dateIni\": \"2020-11-28T16:35:19.000Z\",\r",
+									"            \"dateEnd\": \"2020-12-06T16:35:19.000Z\",\r",
+									"            \"__v\": 0\r",
+									"        }\r",
+									"    ]);    \r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -519,6 +1702,48 @@
 				},
 				{
 					"name": "getByUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Respond should be json\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    var body = pm.response.json();\r",
+									"    pm.expect(body.message).to.eql(\"Success\");\r",
+									"\r",
+									"    pm.expect(body.tasks).to.eql([\r",
+									"        {\r",
+									"            \"_id\": \"5fde50579e491a29eca14544\",\r",
+									"            \"name\": \"Task6\",\r",
+									"            \"description\": \"Task6Description\",\r",
+									"            \"groupId\": \"5fde502a9e491a29eca1452a\",\r",
+									"            \"userId\": \"5fde50609e491a29eca1454c\",\r",
+									"            \"userName\": \"User6\",\r",
+									"            \"dateIni\": \"2020-11-26T16:35:19.000Z\",\r",
+									"            \"dateEnd\": \"2020-12-05T16:35:19.000Z\",\r",
+									"            \"__v\": 0\r",
+									"        }\r",
+									"    ]);    \r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -550,6 +1775,38 @@
 									"\r",
 									"var current_timestamp2 = new Date();\r",
 									"postman.setEnvironmentVariable(\"current_timestamp2\", current_timestamp2.toISOString());"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Respond should be json\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    var body = pm.response.json();\r",
+									"    pm.expect(body.message).to.eql(\"Success\");\r",
+									"\r",
+									"    pm.expect(body.res.name).to.eql(\"Task8\");\r",
+									"    pm.expect(body.res.description).to.eql(\"Task8 description\");\r",
+									"    pm.expect(body.res.estimatedTime).to.eql(60);\r",
+									"    pm.expect(body.res.state).to.eql(\"ToDo\");\r",
+									"    \r",
+									"});\r",
+									"\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -598,6 +1855,38 @@
 								],
 								"type": "text/javascript"
 							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Respond should be json\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    var body = pm.response.json();\r",
+									"    pm.expect(body.message).to.eql(\"Success\");\r",
+									"\r",
+									"    pm.expect(body.res).to.eql({\r",
+									"        \"n\": 1,\r",
+									"        \"nModified\": 1,\r",
+									"        \"ok\": 1\r",
+									"    });    \r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
 						}
 					],
 					"request": {
@@ -639,6 +1928,38 @@
 								],
 								"type": "text/javascript"
 							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Respond should be json\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    var body = pm.response.json();\r",
+									"    pm.expect(body.message).to.eql(\"Success\");\r",
+									"\r",
+									"    pm.expect(body.res).to.eql({\r",
+									"        \"n\": 1,\r",
+									"        \"ok\": 1,\r",
+									"        \"deletedCount\": 1\r",
+									"    });    \r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
 						}
 					],
 					"request": {
@@ -676,6 +1997,77 @@
 			"item": [
 				{
 					"name": "getByGroup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Respond should be json\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    var body = pm.response.json();\r",
+									"    pm.expect(body.message).to.eql(\"Success\");\r",
+									"\r",
+									"    pm.expect(body.histories).to.eql([\r",
+									"        {\r",
+									"            \"_id\": \"5fdf743e0eb4dc2bc464355f\",\r",
+									"            \"taskId\": \"5fde50579e491a29eca14543\",\r",
+									"            \"taskName\": \"Task5\",\r",
+									"            \"userId\": \"5fde50609e491a29eca1454b\",\r",
+									"            \"userName\": \"User5\",\r",
+									"            \"groupId\": \"5fde502a9e491a29eca1452a\",\r",
+									"            \"groupName\": \"Group2\",\r",
+									"            \"date\": \"2020-11-30T16:35:19.000Z\",\r",
+									"            \"action\": \"Finish\",\r",
+									"            \"time\": 20,\r",
+									"            \"__v\": 0\r",
+									"        },\r",
+									"        {\r",
+									"            \"_id\": \"5fde50579e491a29eca14544\",\r",
+									"            \"taskId\": \"5fde504d9e491a29eca14535\",\r",
+									"            \"taskName\": \"Task6\",\r",
+									"            \"userId\": \"5fde50609e491a29eca1454c\",\r",
+									"            \"userName\": \"User6\",\r",
+									"            \"groupId\": \"5fde502a9e491a29eca1452a\",\r",
+									"            \"groupName\": \"Group2\",\r",
+									"            \"date\": \"2020-11-30T16:35:19.000Z\",\r",
+									"            \"action\": \"Work\",\r",
+									"            \"time\": 40,\r",
+									"            \"__v\": 0\r",
+									"        },\r",
+									"        {\r",
+									"            \"_id\": \"5fde50579e491a29eca14545\",\r",
+									"            \"taskId\": \"5fde504d9e491a29eca14535\",\r",
+									"            \"taskName\": \"Task7\",\r",
+									"            \"userId\": \"5fde50609e491a29eca1454d\",\r",
+									"            \"userName\": \"User7\",\r",
+									"            \"groupId\": \"5fde502a9e491a29eca1452a\",\r",
+									"            \"groupName\": \"Group2\",\r",
+									"            \"date\": \"2020-11-30T16:35:19.000Z\",\r",
+									"            \"action\": \"Work\",\r",
+									"            \"time\": 30,\r",
+									"            \"__v\": 0\r",
+									"        }\r",
+									"    ]);\r",
+									"\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -697,6 +2089,51 @@
 				},
 				{
 					"name": "getByUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Respond should be json\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    var body = pm.response.json();\r",
+									"    pm.expect(body.message).to.eql(\"Success\");\r",
+									"\r",
+									"    pm.expect(body.histories).to.eql([\r",
+									"        {\r",
+									"            \"_id\": \"5fde50579e491a29eca14544\",\r",
+									"            \"taskId\": \"5fde504d9e491a29eca14535\",\r",
+									"            \"taskName\": \"Task6\",\r",
+									"            \"userId\": \"5fde50609e491a29eca1454c\",\r",
+									"            \"userName\": \"User6\",\r",
+									"            \"groupId\": \"5fde502a9e491a29eca1452a\",\r",
+									"            \"groupName\": \"Group2\",\r",
+									"            \"date\": \"2020-11-30T16:35:19.000Z\",\r",
+									"            \"action\": \"Work\",\r",
+									"            \"time\": 40,\r",
+									"            \"__v\": 0\r",
+									"        }\r",
+									"    ]);\r",
+									"\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -725,6 +2162,42 @@
 								"exec": [
 									"var current_timestamp = new Date();\r",
 									"postman.setEnvironmentVariable(\"current_timestamp\", current_timestamp.toISOString());"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Respond should be json\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    var body = pm.response.json();\r",
+									"    pm.expect(body.message).to.eql(\"Success\");\r",
+									"\r",
+									"    pm.expect(body.history.taskId).to.eql(\"5fde50579e491a29eca1453f\");\r",
+									"    pm.expect(body.history.taskName).to.eql(\"Task1\");\r",
+									"    pm.expect(body.history.userId).to.eql(\"5fde50609e491a29eca14547\");\r",
+									"    pm.expect(body.history.userName).to.eql(\"User1\");\r",
+									"    pm.expect(body.history.groupId).to.eql(\"5fde502a9e491a29eca14528\");\r",
+									"    pm.expect(body.history.groupName).to.eql(\"Group1\");\r",
+									"    pm.expect(body.history.action).to.eql(\"Finished\");\r",
+									"    pm.expect(body.history.time).to.eql(73);\r",
+									"\r",
+									"});\r",
+									"\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -765,6 +2238,17 @@
 			"item": [
 				{
 					"name": "restoreDatabase",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -786,6 +2270,17 @@
 				},
 				{
 					"name": "exportDatabase",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -812,6 +2307,66 @@
 			"item": [
 				{
 					"name": "get",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Respond should be json\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    var body = pm.response.json();\r",
+									"    pm.expect(body.message).to.eql(\"Success\");\r",
+									"\r",
+									"    pm.expect(body.achivements).to.eql([\r",
+									"        {\r",
+									"            \"_id\": \"5fde502a9e491a29eca20001\",\r",
+									"            \"name\": \"Task Completer 10\",\r",
+									"            \"description\": \"Complete 10 Tasks\",\r",
+									"            \"completePoints\": 10,\r",
+									"            \"__v\": 0\r",
+									"        },\r",
+									"        {\r",
+									"            \"_id\": \"5fde502a9e491a29eca20002\",\r",
+									"            \"name\": \"Task Completer 100\",\r",
+									"            \"description\": \"Complete 100 Tasks\",\r",
+									"            \"completePoints\": 100,\r",
+									"            \"__v\": 0\r",
+									"        },\r",
+									"        {\r",
+									"            \"_id\": \"5fde502a9e491a29eca20003\",\r",
+									"            \"name\": \"Accept invitation\",\r",
+									"            \"description\": \"Accept group invitation\",\r",
+									"            \"completePoints\": 1,\r",
+									"            \"__v\": 0\r",
+									"        },\r",
+									"        {\r",
+									"            \"_id\": \"5fde502a9e491a29eca20004\",\r",
+									"            \"name\": \"Create group\",\r",
+									"            \"description\": \"Create group\",\r",
+									"            \"completePoints\": 1,\r",
+									"            \"__v\": 0\r",
+									"        }\r",
+									"    ]);\r",
+									"\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -833,6 +2388,52 @@
 				},
 				{
 					"name": "getByUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Respond should be json\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    var body = pm.response.json();\r",
+									"    pm.expect(body.message).to.eql(\"Success\");\r",
+									"\r",
+									"    pm.expect(body.achivements).to.eql([\r",
+									"        {\r",
+									"            \"achivementId\": \"5fde502a9e491a29eca20001\",\r",
+									"            \"achivementName\": \"Task Completer 10\",\r",
+									"            \"achivementDescription\": \"Complete 10 Tasks\",\r",
+									"            \"achivementCompletePoints\": 10,\r",
+									"            \"currentPoints\": 10\r",
+									"        },\r",
+									"        {\r",
+									"            \"achivementId\": \"5fde502a9e491a29eca20002\",\r",
+									"            \"achivementName\": \"Task Completer 100\",\r",
+									"            \"achivementDescription\": \"Complete 100 Tasks\",\r",
+									"            \"achivementCompletePoints\": 100,\r",
+									"            \"currentPoints\": 10\r",
+									"        }\r",
+									"    ]);\r",
+									"\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -859,6 +2460,58 @@
 			"item": [
 				{
 					"name": "get",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Respond should be json\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    var body = pm.response.json();\r",
+									"    pm.expect(body.message).to.eql(\"Success\");\r",
+									"\r",
+									"    pm.expect(body.states).to.eql([\r",
+									"        {\r",
+									"            \"_id\": \"5fde502a9e491a29eca18000\",\r",
+									"            \"name\": \"Pending\",\r",
+									"            \"__v\": 0\r",
+									"        },\r",
+									"        {\r",
+									"            \"_id\": \"5fde502a9e491a29eca18001\",\r",
+									"            \"name\": \"Doing\",\r",
+									"            \"__v\": 0\r",
+									"        },\r",
+									"        {\r",
+									"            \"_id\": \"5fde502a9e491a29eca18002\",\r",
+									"            \"name\": \"Delivered\",\r",
+									"            \"__v\": 0\r",
+									"        },\r",
+									"        {\r",
+									"            \"_id\": \"5fde502a9e491a29eca18003\",\r",
+									"            \"name\": \"Finished\",\r",
+									"            \"__v\": 0\r",
+									"        }\r",
+									"    ]);\r",
+									"\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -879,6 +2532,28 @@
 					"response": []
 				}
 			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.sendRequest(\"http://localhost:3000/api/test/restoreDatabasetest\", function (err, response) {",
+					"    console.log(response.json());",
+					"});"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	]
 }

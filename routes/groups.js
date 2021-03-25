@@ -37,30 +37,64 @@ router.post('/add', (req, res, next) => {
   });
   group.save().then(createdGroup => {
     res.status(201).json({
-      message: "Post added successfully",
-      groupId: createdGroup._id
+      message: "Success",
+      group: createdGroup
     });
+  }).catch(err => {
+    res.status(500).json({
+      error : err
+    })
   });
 });
 
 router.post('/delete', (req, res, next) => {
   console.log('Try to delete group to db');
+  let resUsers;
+  let resTasks;
+  let resHistories;
 
   User.updateMany({}, { $pull: {groups: {groupId: req.body.groupId}}}).then(res => {
-    console.log(res);
+    resUsers = res;
+  }).catch(err => {
+    res.status(500).json({
+      error : err
+    })
   });
 
   Task.deleteMany({ groupId: req.body.groupId}).then(res => {
     console.log('Task group deleted');
+    resTasks = res;
+  }).catch(err => {
+    res.status(500).json({
+      error : err
+    })
   });
 
   History.deleteMany({ groupId: req.body.groupId}).then(res => {
     console.log('Deleted group histories');
+    resHistories = res;
+  }).catch(err => {
+    res.status(500).json({
+      error : err
+    })
   });
 
   Group.deleteOne({ _id: req.body.groupId }).then(result => {
     console.log('Group deleted');
-    res.status(200).json({ message: "Group deleted!" });
+    res.status(201).json({
+      message: "Success",
+      res: {
+        "users": resUsers,
+        "tasks": resTasks,
+        "histories": resHistories,
+        "group": result
+      },
+      groupId: req.body.groupId
+    });
+    }).catch(err => {
+    res.status(500).json({
+      error : err
+    })
   });
 
 });
