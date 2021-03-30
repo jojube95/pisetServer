@@ -55,7 +55,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"console.log('get');"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -116,8 +116,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"\r",
-									"postman. setNextRequest('get');"
+									""
 								],
 								"type": "text/javascript"
 							}

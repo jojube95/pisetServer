@@ -7,7 +7,8 @@
     "start:desa": "nodemon server.js desa",
     "start:test": "nodemon server.js test",
     "start:prod": "node server.js prod",
-    "start": "node server.js prod"
+    "start": "node server.js prod",
+    "test": "newman run postman/Piset.postman_collection.json"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
