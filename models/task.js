@@ -10,7 +10,7 @@ const taskSchema = mongoose.Schema({
   dateIni: {type: Date, required: false},
   dateEnd: {type: Date, required: false},
   estimatedTime: {type: Number, required: false},
-  state:  {type: String, required: false}
+  state:  {type: stateSchema, required: false}
 });
 
 module.exports = mongoose.model('Task', taskSchema);

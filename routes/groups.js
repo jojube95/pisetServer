@@ -47,6 +47,21 @@ router.post('/add', (req, res, next) => {
   });
 });
 
+router.post('/update', (req, res, next) => {
+  Group.updateOne({'_id': req.body.group._id}, {
+    name: req.body.group.name
+  }).then(result => {
+    res.status(201).json({
+      message: 'Success',
+      res: result
+    });
+  }).catch(err => {
+    res.status(500).json({
+      error: err
+    });
+  });
+});
+
 router.post('/delete', (req, res, next) => {
   console.log('Try to delete group to db');
   let resUsers;

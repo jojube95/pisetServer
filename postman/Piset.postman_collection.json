@@ -151,6 +151,80 @@
 					"response": []
 				},
 				{
+					"name": "update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Respond should be json\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    var body = pm.response.json();\r",
+									"    pm.expect(body.message).to.eql(\"Success\");\r",
+									"\r",
+									"    pm.expect(body.res).to.eql({\r",
+									"        \"n\": 1,\r",
+									"        \"nModified\": 1,\r",
+									"        \"ok\": 1\r",
+									"    });   \r",
+									"    \r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"group\": {\r\n        \"_id\": \"5fde502a9e491a29eca1452a\",\r\n        \"name\": \"Group4\"\r\n        }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/groups/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"groups",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "delete",
 					"event": [
 						{
@@ -1801,7 +1875,7 @@
 									"    pm.expect(body.res.name).to.eql(\"Task8\");\r",
 									"    pm.expect(body.res.description).to.eql(\"Task8 description\");\r",
 									"    pm.expect(body.res.estimatedTime).to.eql(60);\r",
-									"    pm.expect(body.res.state).to.eql(\"ToDo\");\r",
+									"    pm.expect(body.res.state.name).to.eql(\"ToDo\");\r",
 									"    \r",
 									"});\r",
 									"\r",
@@ -1816,7 +1890,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"task\":{\r\n        \"name\": \"Task8\",\r\n        \"description\": \"Task8 description\",\r\n        \"groupId\": \"5fde502a9e491a29eca14528\",\r\n        \"dateIni\": \"{{current_timestamp1}}\",\r\n        \"dateEnd\": \"{{current_timestamp2}}\",\r\n        \"estimatedTime\": 60,\r\n        \"state\":  \"ToDo\"        \r\n    }\r\n}",
+							"raw": "{\r\n    \"task\":{\r\n        \"name\": \"Task8\",\r\n        \"description\": \"Task8 description\",\r\n        \"groupId\": \"5fde502a9e491a29eca14528\",\r\n        \"dateIni\": \"{{current_timestamp1}}\",\r\n        \"dateEnd\": \"{{current_timestamp2}}\",\r\n        \"estimatedTime\": 60,\r\n        \"state\":  {\"name\": \"ToDo\"}        \r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
