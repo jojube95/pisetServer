@@ -21,8 +21,9 @@ router.get('/get', (req, res, next) => {
   });
 });
 
-router.get('/getWithoutGroup', (req, res, next) => {
-  User.find({ groups: [] }).then(result =>{
+router.get('/getWithoutGroup:id', (req, res, next) => {
+  console.log(req.params.id)
+  User.find({groups: { $not: {$elemMatch: {groupId: req.params.id}}}}).then(result =>{
     res.status(200).json({
       message: "Success",
       users: result
