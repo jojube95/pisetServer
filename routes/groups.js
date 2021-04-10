@@ -28,6 +28,20 @@ router.get('/get', (req, res, next) => {
   });
 });
 
+router.get('/getByUser:id', (req, res, next) => {
+  console.log('Getting user groups');
+  Group.find().then(result =>{
+    res.status(200).json({
+      message: "Success",
+      groups: result
+    });
+  }).catch(err => {
+    res.status(500).json({
+      error : err
+    })
+  });
+});
+
 
 router.post('/add', (req, res, next) => {
   console.log('Try to add group to db');
@@ -68,7 +82,7 @@ router.post('/delete', (req, res, next) => {
   let resTasks;
   let resHistories;
 
-  User.updateMany({}, { $pull: {groups: {groupId: req.body.groupId}}}).then(res => {
+  User.updateMany({}, { $pull: {groups: {'group._id': req.body.groupId}}}).then(res => {
     resUsers = res;
   }).catch(err => {
     res.status(500).json({

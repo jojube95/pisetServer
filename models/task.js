@@ -5,6 +5,7 @@ const taskSchema = mongoose.Schema({
   name: {type: String, required: true},
   description: {type: String, required: true},
   groupId: {type: String, required: true},
+  groupName: {type: String, required: true},
   userId: {type: String, required: false},
   userName: {type: String, required: false},
   dateIni: {type: Date, required: false},

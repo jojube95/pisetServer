@@ -23,7 +23,7 @@ router.get('/get', (req, res, next) => {
 
 router.get('/getWithoutGroup:id', (req, res, next) => {
   console.log(req.params.id)
-  User.find({groups: { $not: {$elemMatch: {groupId: req.params.id}}}}).then(result =>{
+  User.find({groups: { $not: {$elemMatch: {'group._id': req.params.id}}}}).then(result =>{
     res.status(200).json({
       message: "Success",
       users: result
@@ -36,7 +36,7 @@ router.get('/getWithoutGroup:id', (req, res, next) => {
 });
 
 router.get('/getByGroup:id', (req, res, next) => {
-  User.find({groups: { $elemMatch: {groupId: req.params.id}}}).then(result =>{
+  User.find({'groups.group._id': req.params.id}).then(result =>{
     res.status(200).json({
       message: "Success",
       users: result
@@ -82,7 +82,7 @@ router.post('/addUserToGroup', (req, res, next) => {
 router.post('/deleteUserFromGroup', (req, res, next) => {
   console.log("Trying delete user from group");
 
-  User.updateOne({ _id: req.body.userId }, { $pull: {groups: {groupId: req.body.groupId}}}).then(result => {
+  User.updateOne({ _id: req.body.userId }, { $pull: {groups: {'group._id': req.body.groupId}}}).then(result => {
     console.log(result);
     res.status(201).json({
       message: 'Success',

@@ -11,6 +11,22 @@ module.exports = function(io) {
   return router;
 };
 
+router.get('/getByUserGroups', async (req, res, next) => {
+  let userGroups = JSON.parse(req.query.userGroups);
+  let taskRes = [];
+
+  for (let userGroup of userGroups){
+    let tasks =  await Task.find({groupId: userGroup.group._id});
+    for (let task of tasks){
+      taskRes.push(task);
+    }
+  }
+  res.status(200).json({
+    message: "Success",
+    tasks: taskRes
+  });
+});
+
 router.get('/getByGroup:id', (req, res, next) => {
   Task.find({ groupId: req.params.id }).then(result =>{
     res.status(200).json({
@@ -42,6 +58,7 @@ router.post('/addToGroup', (req, res, next) => {
     name: req.body.task.name,
     description: req.body.task.description,
     groupId: req.body.task.groupId,
+    groupName: req.body.task.groupName,
     dateIni: req.body.task.dateIni,
     dateEnd: req.body.task.dateEnd,
     estimatedTime: req.body.task.estimatedTime,
@@ -78,6 +95,7 @@ router.post('/update', (req, res, next) => {
       name: req.body.task.name,
       description: req.body.task.description,
       groupId: req.body.task.groupId,
+      groupName: req.body.task.groupName,
       dateIni: req.body.task.dateIni,
       dateEnd: req.body.task.dateEnd,
       estimatedTime: req.body.task.estimatedTime,

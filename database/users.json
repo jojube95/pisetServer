@@ -21,12 +21,17 @@
   "admin": false,
   "__v": 0,
   "groups": [{
-    "groupId": "5fde502a9e491a29eca14528",
-    "groupName": "Group1",
+    "group": {
+      "_id": "5fde502a9e491a29eca14528",
+      "name": "Group1"
+    },
     "groupAdmin": true
   },
-  {"groupId": "5fde502a9e491a29eca1452a",
-    "groupName": "Group2",
+  {
+    "group": {
+      "_id": "5fde502a9e491a29eca1452a",
+      "name": "Group2"
+    },
     "groupAdmin": false
   }],
   "achivements": [{
@@ -47,8 +52,10 @@
   "admin": false,
   "__v": 0,
   "groups": [{
-    "groupId": "5fde502a9e491a29eca14528",
-    "groupName": "Group1",
+    "group": {
+      "_id": "5fde502a9e491a29eca14528",
+      "name": "Group1"
+    },
     "groupAdmin": false
   }],
   "achivements": [{
@@ -75,8 +82,10 @@
   "admin": false,
   "__v": 0,
   "groups": [{
-    "groupId": "5fde502a9e491a29eca14528",
-    "groupName": "Group1",
+    "group": {
+      "_id": "5fde502a9e491a29eca14528",
+      "name": "Group1"
+    },
     "groupAdmin": false
   }],
   "achivements": [{
@@ -103,8 +112,10 @@
   "admin": false,
   "__v": 0,
   "groups": [{
-    "groupId": "5fde502a9e491a29eca14528",
-    "groupName": "Group1",
+    "group": {
+      "_id": "5fde502a9e491a29eca14528",
+      "name": "Group1"
+    },
     "groupAdmin": false
   }],
   "achivements": [{
@@ -131,8 +142,10 @@
   "admin": false,
   "__v": 0,
   "groups": [{
-    "groupId": "5fde502a9e491a29eca1452a",
-    "groupName": "Group2",
+    "group": {
+      "_id": "5fde502a9e491a29eca1452a",
+      "name": "Group2"
+    },
     "groupAdmin": true
   }],
   "achivements": [{
@@ -159,8 +172,10 @@
   "admin": false,
   "__v": 0,
   "groups": [{
-    "groupId": "5fde502a9e491a29eca1452a",
-    "groupName": "Group2",
+    "group": {
+      "_id": "5fde502a9e491a29eca1452a",
+      "name": "Group2"
+    },
     "groupAdmin": false
   }],
   "achivements": [{
@@ -181,8 +196,10 @@
   "admin": false,
   "__v": 0,
   "groups": [{
-    "groupId": "5fde502a9e491a29eca1452a",
-    "groupName": "Group2",
+    "group": {
+      "_id": "5fde502a9e491a29eca1452a",
+      "name": "Group2"
+    },
     "groupAdmin": false
   }],
   "achivements": [{

@@ -5,6 +5,7 @@
   "name": "Task1",
   "description": "Task1Description",
   "groupId": "5fde502a9e491a29eca14528",
+  "groupName": "Group1",
   "userId": "5fde50609e491a29eca14547",
   "userName": "User1",
   "dateIni": {
@@ -28,6 +29,7 @@
   "name": "Task2",
   "description": "Task2Description",
   "groupId": "5fde502a9e491a29eca14528",
+  "groupName": "Group1",
   "userId": "5fde50609e491a29eca14548",
   "userName": "User2",
   "dateIni": {
@@ -51,6 +53,7 @@
   "name": "Task3",
   "description": "Task3Description",
   "groupId": "5fde502a9e491a29eca14528",
+  "groupName": "Group1",
   "userId": "5fde50609e491a29eca14549",
   "userName": "User3",
   "dateIni": {
@@ -74,6 +77,7 @@
   "name": "Task4",
   "description": "Task4Description",
   "groupId": "5fde502a9e491a29eca14528",
+  "groupName": "Group1",
   "userId": "5fde50609e491a29eca1454a",
   "userName": "User4",
   "dateIni": {
@@ -97,6 +101,7 @@
   "name": "Task5",
   "description": "Task5Description",
   "groupId": "5fde502a9e491a29eca1452a",
+  "groupName": "Group2",
   "userId": "5fde50609e491a29eca1454b",
   "userName": "User5",
   "dateIni": {
@@ -120,6 +125,7 @@
   "name": "Task6",
   "description": "Task6Description",
   "groupId": "5fde502a9e491a29eca1452a",
+  "groupName": "Group2",
   "userId": "5fde50609e491a29eca1454c",
   "userName": "User6",
   "dateIni": {
@@ -143,6 +149,7 @@
   "name": "Task7",
   "description": "Task7Description",
   "groupId": "5fde502a9e491a29eca1452a",
+  "groupName": "Group2",
   "userId": "5fde50609e491a29eca1454d",
   "userName": "User7",
   "dateIni": {
