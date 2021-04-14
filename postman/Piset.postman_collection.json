@@ -1652,7 +1652,9 @@
 									"        {\r",
 									"            \"_id\": \"5fde502a9e491a29eca17002\",\r",
 									"            \"groupId\": \"5fde502a9e491a29eca1452a\",\r",
+									"            \"groupName\": \"Group2\",\r",
 									"            \"userId\": \"5fde50609e491a29eca1454c\",\r",
+									"            \"userName\": \"User6\",\r",
 									"            \"__v\": 0\r",
 									"        }\r",
 									"    ]);\r",
@@ -2148,7 +2150,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/tasks/getByUserGroups?user={\"mail\":\"user1@user.com\",\"password\":\"$2b$10$0HqHTbfG6lSlwpFjXIfj0eQCge7EZDUA77cEj4/kWMqZiIpiXCwdi\",\"name\":\"User1\",\"secondName\":\"User1\",\"admin\":false,\"groups\":[{\"groupId\":\"5fde502a9e491a29eca14528\",\"groupName\":\"Group1\",\"groupAdmin\":true},{\"groupId\":\"5fde502a9e491a29eca1452a\",\"groupName\":\"Group2\",\"groupAdmin\":false}],\"achivements\":[{\"achivementId\":\"5fde502a9e491a29eca20004\",\"achivementName\":\"Create group\",\"achivementDescription\":\"Create group\",\"achivementCompletePoints\":1,\"currentPoints\":1}],\"_id\":\"5fde50609e491a29eca14547\"}",
+							"raw": "http://localhost:3000/api/tasks/getByUserGroups?userGroups=[{\"group\":{\"_id\":\"5fde502a9e491a29eca14528\",\"name\":\"Group1\"},\"groupAdmin\":true},{\"group\":{\"_id\":\"5fde502a9e491a29eca1452a\",\"name\":\"Group2\"},\"groupAdmin\":false}]",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -2161,8 +2163,8 @@
 							],
 							"query": [
 								{
-									"key": "user",
-									"value": "{\"mail\":\"user1@user.com\",\"password\":\"$2b$10$0HqHTbfG6lSlwpFjXIfj0eQCge7EZDUA77cEj4/kWMqZiIpiXCwdi\",\"name\":\"User1\",\"secondName\":\"User1\",\"admin\":false,\"groups\":[{\"groupId\":\"5fde502a9e491a29eca14528\",\"groupName\":\"Group1\",\"groupAdmin\":true},{\"groupId\":\"5fde502a9e491a29eca1452a\",\"groupName\":\"Group2\",\"groupAdmin\":false}],\"achivements\":[{\"achivementId\":\"5fde502a9e491a29eca20004\",\"achivementName\":\"Create group\",\"achivementDescription\":\"Create group\",\"achivementCompletePoints\":1,\"currentPoints\":1}],\"_id\":\"5fde50609e491a29eca14547\"}"
+									"key": "userGroups",
+									"value": "[{\"group\":{\"_id\":\"5fde502a9e491a29eca14528\",\"name\":\"Group1\"},\"groupAdmin\":true},{\"group\":{\"_id\":\"5fde502a9e491a29eca1452a\",\"name\":\"Group2\"},\"groupAdmin\":false}]"
 								}
 							]
 						}
@@ -2557,6 +2559,156 @@
 								"api",
 								"histories",
 								"getByGroup5fde502a9e491a29eca1452a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByUserGroups",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Respond should be json\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    var body = pm.response.json();\r",
+									"    pm.expect(body.message).to.eql(\"Success\");\r",
+									"\r",
+									"    pm.expect(body.histories).to.eql([\r",
+									"        {\r",
+									"            \"_id\": \"5fde50459e491a29eca1452c\",\r",
+									"            \"taskId\": \"5fde50579e491a29eca1453f\",\r",
+									"            \"taskName\": \"Task1\",\r",
+									"            \"userId\": \"5fde50609e491a29eca14547\",\r",
+									"            \"userName\": \"User1\",\r",
+									"            \"groupId\": \"5fde502a9e491a29eca14528\",\r",
+									"            \"groupName\": \"Group1\",\r",
+									"            \"date\": \"2020-11-30T16:35:19.000Z\",\r",
+									"            \"action\": \"Finish\",\r",
+									"            \"time\": 10,\r",
+									"            \"__v\": 0\r",
+									"        },\r",
+									"        {\r",
+									"            \"_id\": \"5fde50459e491a29eca1452d\",\r",
+									"            \"taskId\": \"5fde50579e491a29eca14540\",\r",
+									"            \"taskName\": \"Task2\",\r",
+									"            \"userId\": \"5fde50609e491a29eca14548\",\r",
+									"            \"userName\": \"User2\",\r",
+									"            \"groupId\": \"5fde502a9e491a29eca14528\",\r",
+									"            \"groupName\": \"Group1\",\r",
+									"            \"date\": \"2020-11-30T16:35:19.000Z\",\r",
+									"            \"action\": \"Work\",\r",
+									"            \"time\": 15,\r",
+									"            \"__v\": 0\r",
+									"        },\r",
+									"        {\r",
+									"            \"_id\": \"5fde50609e491a29eca14549\",\r",
+									"            \"taskId\": \"5fde50579e491a29eca14541\",\r",
+									"            \"taskName\": \"Task3\",\r",
+									"            \"userId\": \"5fde50609e491a29eca14548\",\r",
+									"            \"userName\": \"User3\",\r",
+									"            \"groupId\": \"5fde502a9e491a29eca14528\",\r",
+									"            \"groupName\": \"Group1\",\r",
+									"            \"date\": \"2020-11-30T16:35:19.000Z\",\r",
+									"            \"action\": \"Move state\",\r",
+									"            \"time\": 0,\r",
+									"            \"__v\": 0\r",
+									"        },\r",
+									"        {\r",
+									"            \"_id\": \"5fde50459e491a29eca1452f\",\r",
+									"            \"taskId\": \"5fde50579e491a29eca14542\",\r",
+									"            \"taskName\": \"Task4\",\r",
+									"            \"userId\": \"5fde50609e491a29eca1454a\",\r",
+									"            \"userName\": \"User4\",\r",
+									"            \"groupId\": \"5fde502a9e491a29eca14528\",\r",
+									"            \"groupName\": \"Group1\",\r",
+									"            \"date\": \"2020-11-30T16:35:19.000Z\",\r",
+									"            \"action\": \"Move state\",\r",
+									"            \"time\": 0,\r",
+									"            \"__v\": 0\r",
+									"        },\r",
+									"        {\r",
+									"            \"_id\": \"5fdf743e0eb4dc2bc464355f\",\r",
+									"            \"taskId\": \"5fde50579e491a29eca14543\",\r",
+									"            \"taskName\": \"Task5\",\r",
+									"            \"userId\": \"5fde50609e491a29eca1454b\",\r",
+									"            \"userName\": \"User5\",\r",
+									"            \"groupId\": \"5fde502a9e491a29eca1452a\",\r",
+									"            \"groupName\": \"Group2\",\r",
+									"            \"date\": \"2020-11-30T16:35:19.000Z\",\r",
+									"            \"action\": \"Finish\",\r",
+									"            \"time\": 20,\r",
+									"            \"__v\": 0\r",
+									"        },\r",
+									"        {\r",
+									"            \"_id\": \"5fde50579e491a29eca14544\",\r",
+									"            \"taskId\": \"5fde504d9e491a29eca14535\",\r",
+									"            \"taskName\": \"Task6\",\r",
+									"            \"userId\": \"5fde50609e491a29eca1454c\",\r",
+									"            \"userName\": \"User6\",\r",
+									"            \"groupId\": \"5fde502a9e491a29eca1452a\",\r",
+									"            \"groupName\": \"Group2\",\r",
+									"            \"date\": \"2020-11-30T16:35:19.000Z\",\r",
+									"            \"action\": \"Work\",\r",
+									"            \"time\": 40,\r",
+									"            \"__v\": 0\r",
+									"        },\r",
+									"        {\r",
+									"            \"_id\": \"5fde50579e491a29eca14545\",\r",
+									"            \"taskId\": \"5fde504d9e491a29eca14535\",\r",
+									"            \"taskName\": \"Task7\",\r",
+									"            \"userId\": \"5fde50609e491a29eca1454d\",\r",
+									"            \"userName\": \"User7\",\r",
+									"            \"groupId\": \"5fde502a9e491a29eca1452a\",\r",
+									"            \"groupName\": \"Group2\",\r",
+									"            \"date\": \"2020-11-30T16:35:19.000Z\",\r",
+									"            \"action\": \"Work\",\r",
+									"            \"time\": 30,\r",
+									"            \"__v\": 0\r",
+									"        }\r",
+									"    ]);\r",
+									"\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/histories/getByUserGroups?userGroups=[{\"group\":{\"_id\":\"5fde502a9e491a29eca14528\",\"name\":\"Group1\"},\"groupAdmin\":true},{\"group\":{\"_id\":\"5fde502a9e491a29eca1452a\",\"name\":\"Group2\"},\"groupAdmin\":false}]",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"histories",
+								"getByUserGroups"
+							],
+							"query": [
+								{
+									"key": "userGroups",
+									"value": "[{\"group\":{\"_id\":\"5fde502a9e491a29eca14528\",\"name\":\"Group1\"},\"groupAdmin\":true},{\"group\":{\"_id\":\"5fde502a9e491a29eca1452a\",\"name\":\"Group2\"},\"groupAdmin\":false}]"
+								}
 							]
 						}
 					},

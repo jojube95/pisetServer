@@ -10,6 +10,22 @@ module.exports = function(io) {
     return router;
 };
 
+router.get('/getByUserGroups', async (req, res, next) => {
+    let userGroups = JSON.parse(req.query.userGroups);
+    let historesRes = [];
+
+    for (let userGroup of userGroups){
+        let histories =  await History.find({groupId: userGroup.group._id});
+        for (let history of histories){
+            historesRes.push(history);
+        }
+    }
+    res.status(200).json({
+        message: "Success",
+        histories: historesRes
+    });
+});
+
 router.get('/getByUser:id', (req, res, next) => {
     History.find({ userId: req.params.id }).then(result =>{
         res.status(200).json({
