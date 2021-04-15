@@ -49,8 +49,8 @@ app.set("port", port);
 
 const uris = {
   "desa": "mongodb://127.0.0.1:27017/desa",
-  "test": "mongodb://127.0.0.1:27017/test",
-  "prod": "mongodb+srv://root:root@cluster0-53xnf.mongodb.net/piset"
+  "test": "mongodb+srv://root:root@cluster0-53xnf.mongodb.net/piset-test",
+  "prod": "mongodb+srv://root:root@cluster0-53xnf.mongodb.net/piset-master"
 };
 
 let database;

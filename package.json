@@ -7,7 +7,7 @@
     "start:desa": "nodemon server.js desa",
     "start:test": "nodemon server.js test",
     "start:prod": "node server.js prod",
-    "start": "node server.js test",
+    "start": "node server.js ${environment}",
     "test": "newman run postman/Piset.postman_collection.json"
   },
   "dependencies": {
