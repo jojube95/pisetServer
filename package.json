@@ -7,7 +7,7 @@
     "start:desa": "nodemon server.js desa",
     "start:test": "nodemon server.js test",
     "start:prod": "node server.js prod",
-    "start": "node server.js prod",
+    "start": "node server.js test",
     "test": "newman run postman/Piset.postman_collection.json"
   },
   "dependencies": {
@@ -21,6 +21,9 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
+  },
+  "engines": {
+    "node": "10.13.0"
   },
   "repository": {
     "type": "git",
