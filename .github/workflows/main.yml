@@ -35,10 +35,7 @@ jobs:
       uses: supercharge/mongodb-github-action@1.3.0
       with:
         mongodb-version: ${{ matrix.mongodb-version }}
-    - run: ls
-    - run: cd github
-    - run: ls
-    - run: mongorestore --archive=/github/workspace/database/test --drop
+    - run: mongorestore --archive=database/test --drop
     - run: npm install
 
     - run: npm test
