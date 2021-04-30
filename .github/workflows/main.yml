@@ -36,6 +36,7 @@ jobs:
       with:
         mongodb-version: ${{ matrix.mongodb-version }}
     - run: mongo version
+    - run: mongorestore --version
     - run: mongorestore "mongodb+srv://cluster0.53xnf.mongodb.net/piset-test" -u root -p root --archive=database/test --drop
     - run: npm install
 
