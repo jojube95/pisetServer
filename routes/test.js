@@ -17,8 +17,7 @@ router.get('/restoreDatabase:id', (req, res, next) => {
 
   const database = req.params.id;
 
-  //mongorestore "mongodb+srv://cluster0.53xnf.mongodb.net/piset-test" -u root -p root --archive=database/test --drop
-  let restoreProcess = 'mongorestore --archive=database/' + database + ' --drop';
+  let restoreProcess = 'mongorestore "mongodb+srv://cluster0.53xnf.mongodb.net/piset-test" -u root -p root --archive=database/test --drop';
 
   exec(restoreProcess, (error, stdout, stderr) => {
     if (error) {
@@ -43,8 +42,7 @@ router.get('/exportDatabase:id', (req, res, next) => {
 
   const database = req.params.id;
 
-  //mongodump "mongodb+srv://cluster0.53xnf.mongodb.net/piset-test" -u root -p root --archive=database/test
-  let backupProcess = 'mongodump --db=' + database + ' --archive=database/' + database;
+  let backupProcess = 'mongodump "mongodb+srv://cluster0.53xnf.mongodb.net/piset-test" -u root -p root --archive=database/test';
 
   exec(backupProcess, (error, stdout, stderr) => {
     if (error) {
