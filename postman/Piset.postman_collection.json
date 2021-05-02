@@ -23,10 +23,6 @@
 									"    pm.response.to.be.json;\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Response time is less than 400ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
-									"});\r",
-									"\r",
 									"pm.test(\"Body matches string\", function () {\r",
 									"    var body = pm.response.json();\r",
 									"    pm.expect(body.message).to.eql(\"Success\");\r",
@@ -48,7 +44,6 @@
 									"            \"name\": \"Group3\",\r",
 									"            \"__v\": 0\r",
 									"        });\r",
-									"\r",
 									"});\r",
 									"\r",
 									""
@@ -86,76 +81,6 @@
 					"response": []
 				},
 				{
-					"name": "add",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 201\", function () {\r",
-									"    pm.response.to.have.status(201);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Respond should be json\", function () {\r",
-									"    pm.response.to.be.json;\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Response time is less than 200ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Body matches string\", function () {\r",
-									"    var body = pm.response.json();\r",
-									"    pm.expect(body.message).to.eql(\"Success\");\r",
-									"\r",
-									"    pm.expect(body.group.name).to.eql(\"Group3\");\r",
-									"    \r",
-									"});\r",
-									"\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"group\": {\"name\": \"Group3\"}\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/groups/add",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"groups",
-								"add"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "update",
 					"event": [
 						{
@@ -170,10 +95,6 @@
 									"    pm.response.to.be.json;\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Response time is less than 200ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
-									"});\r",
-									"\r",
 									"pm.test(\"Body matches string\", function () {\r",
 									"    var body = pm.response.json();\r",
 									"    pm.expect(body.message).to.eql(\"Success\");\r",
@@ -182,9 +103,7 @@
 									"    pm.expect(body.res.nModified).to.eql(1);   \r",
 									"    pm.expect(body.res.ok).to.eql(1);   \r",
 									"    \r",
-									"});\r",
-									"\r",
-									""
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -228,6 +147,70 @@
 					"response": []
 				},
 				{
+					"name": "add",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Respond should be json\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    var body = pm.response.json();\r",
+									"    pm.expect(body.message).to.eql(\"Success\");\r",
+									"\r",
+									"    pm.expect(body.group.name).to.eql(\"Group3\");\r",
+									"    \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"group\": {\"name\": \"Group3\"}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/groups/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"groups",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "delete",
 					"event": [
 						{
@@ -242,27 +225,16 @@
 									"    pm.response.to.be.json;\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Response time is less than 1000ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
-									"});\r",
-									"\r",
 									"pm.test(\"Body matches string\", function () {\r",
 									"    var body = pm.response.json();\r",
 									"    pm.expect(body.message).to.eql(\"Success\");\r",
 									"\r",
-									"    pm.expect(body.res.tasks.n).to.eql(0);    \r",
-									"    pm.expect(body.res.tasks.ok).to.eql(1);\r",
-									"\r",
-									"    pm.expect(body.res.histories.n).to.eql(0);\r",
-									"    pm.expect(body.res.histories.ok).to.eql(1);\r",
-									"\r",
-									"    pm.expect(body.res.group.n).to.eql(1);  \r",
+									"    pm.expect(body.res.group.n).to.eql(1);\r",
+									"    pm.expect(body.res.group.deletedCount).to.eql(1);\r",
 									"    pm.expect(body.res.group.ok).to.eql(1);\r",
 									"\r",
 									"    pm.expect(body.groupId).to.eql(\"608c21dcdeca850b5c35b080\");\r",
-									"});\r",
-									"\r",
-									""
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -302,6 +274,148 @@
 			"name": "users",
 			"item": [
 				{
+					"name": "signin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Respond should be json\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    var body = pm.response.json();\r",
+									"    pm.expect(body.message).to.eql(\"Success\");\r",
+									"\r",
+									"    pm.expect(body.token.length > 0).to.eql(true);\r",
+									"\r",
+									"    pm.expect(body.user).to.eql({\r",
+									"        \"_id\": \"5fde50609e491a29eca14547\",\r",
+									"        \"mail\": \"user1@user.com\",\r",
+									"        \"password\": \"$2b$10$aIlSHDuKyIOChs4kIredYOgG1yrrKSFXQ1sTQ5AIk9iM8djI1rC5e\",\r",
+									"        \"name\": \"User1Edited\",\r",
+									"        \"secondName\": \"User1Edited\",\r",
+									"        \"admin\": false,\r",
+									"        \"__v\": 0,\r",
+									"        \"groups\": [\r",
+									"            {\r",
+									"                \"group\": {\r",
+									"                    \"_id\": \"5fde502a9e491a29eca14528\",\r",
+									"                    \"name\": \"Group1\"\r",
+									"                },\r",
+									"                \"groupAdmin\": true\r",
+									"            }\r",
+									"        ],\r",
+									"        \"achivements\": [\r",
+									"            {\r",
+									"                \"achivementId\": \"5fde502a9e491a29eca20004\",\r",
+									"                \"achivementName\": \"Create group\",\r",
+									"                \"achivementDescription\": \"Create group\",\r",
+									"                \"achivementCompletePoints\": 1,\r",
+									"                \"currentPoints\": 1\r",
+									"            }\r",
+									"        ]\r",
+									"    });\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"mail\": \"user1@user.com\",\r\n    \"password\": \"useruser\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/signin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "signup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Respond should be json\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    var body = pm.response.json();\r",
+									"    pm.expect(body.message).to.eql(\"Success\");\r",
+									"\r",
+									"    pm.expect(body.user.mail).to.eql(\"userNew@user.com\");\r",
+									"    pm.expect(body.user.name).to.eql(\"UserNew\");\r",
+									"    pm.expect(body.user.secondName).to.eql(\"UserNew\");\r",
+									"    pm.expect(body.user.admin).to.eql(false);\r",
+									"    pm.expect(body.user.groups).to.eql([]);\r",
+									"    pm.expect(body.user.achivements).to.eql([]);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"mail\": \"userNew@user.com\",\r\n    \"password\": \"useruser\",\r\n    \"name\": \"UserNew\",\r\n    \"secondName\": \"UserNew\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "addUserToGroup",
 					"event": [
 						{
@@ -316,10 +430,6 @@
 									"    pm.response.to.be.json;\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Response time is less than 200ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
-									"});\r",
-									"\r",
 									"pm.test(\"Body matches string\", function () {\r",
 									"    var body = pm.response.json();\r",
 									"    pm.expect(body.message).to.eql(\"Success\");\r",
@@ -327,9 +437,7 @@
 									"    pm.expect(body.res.n).to.eql(1);\r",
 									"    pm.expect(body.res.nModified).to.eql(1);\r",
 									"    pm.expect(body.res.ok).to.eql(1);\r",
-									"});\r",
-									"\r",
-									""
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -378,10 +486,6 @@
 									"    pm.response.to.be.json;\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Response time is less than 200ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
-									"});\r",
-									"\r",
 									"pm.test(\"Body matches string\", function () {\r",
 									"    var body = pm.response.json();\r",
 									"    pm.expect(body.message).to.eql(\"Success\");\r",
@@ -389,9 +493,7 @@
 									"    pm.expect(body.res.n).to.eql(1);\r",
 									"    pm.expect(body.res.nModified).to.eql(1);\r",
 									"    pm.expect(body.res.ok).to.eql(1);\r",
-									"});\r",
-									"\r",
-									""
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -426,160 +528,6 @@
 					"response": []
 				},
 				{
-					"name": "signup",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 201\", function () {\r",
-									"    pm.response.to.have.status(201);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Respond should be json\", function () {\r",
-									"    pm.response.to.be.json;\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Response time is less than 400ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Body matches string\", function () {\r",
-									"    var body = pm.response.json();\r",
-									"    pm.expect(body.message).to.eql(\"Success\");\r",
-									"\r",
-									"    pm.expect(body.user.mail).to.eql(\"userNew@user.com\");\r",
-									"    pm.expect(body.user.name).to.eql(\"UserNew\");\r",
-									"    pm.expect(body.user.secondName).to.eql(\"UserNew\");\r",
-									"    pm.expect(body.user.admin).to.eql(false);\r",
-									"    pm.expect(body.user.groups).to.eql([]);\r",
-									"    pm.expect(body.user.achivements).to.eql([]);\r",
-									"});\r",
-									"\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"mail\": \"userNew@user.com\",\r\n    \"password\": \"useruser\",\r\n    \"name\": \"UserNew\",\r\n    \"secondName\": \"UserNew\"\r\n    }",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/users/signup",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"users",
-								"signup"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "signin",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 201\", function () {\r",
-									"    pm.response.to.have.status(201);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Respond should be json\", function () {\r",
-									"    pm.response.to.be.json;\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Response time is less than 400ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Body matches string\", function () {\r",
-									"    var body = pm.response.json();\r",
-									"    pm.expect(body.message).to.eql(\"Success\");\r",
-									"\r",
-									"    pm.expect(body.token.length > 0).to.eql(true);\r",
-									"\r",
-									"    pm.expect(body.user).to.eql({\r",
-									"        \"_id\": \"5fde50609e491a29eca14547\",\r",
-									"        \"mail\": \"user1@user.com\",\r",
-									"        \"password\": \"$2b$10$aIlSHDuKyIOChs4kIredYOgG1yrrKSFXQ1sTQ5AIk9iM8djI1rC5e\",\r",
-									"        \"name\": \"User1Edited\",\r",
-									"        \"secondName\": \"User1Edited\",\r",
-									"        \"admin\": false,\r",
-									"        \"__v\": 0,\r",
-									"        \"groups\": [\r",
-									"            {\r",
-									"                \"group\": {\r",
-									"                    \"_id\": \"5fde502a9e491a29eca14528\",\r",
-									"                    \"name\": \"Group1\"\r",
-									"                },\r",
-									"                \"groupAdmin\": true\r",
-									"            }\r",
-									"        ],\r",
-									"        \"achivements\": [\r",
-									"            {\r",
-									"                \"achivementId\": \"5fde502a9e491a29eca20004\",\r",
-									"                \"achivementName\": \"Create group\",\r",
-									"                \"achivementDescription\": \"Create group\",\r",
-									"                \"achivementCompletePoints\": 1,\r",
-									"                \"currentPoints\": 1\r",
-									"            }\r",
-									"        ]\r",
-									"    });\r",
-									"\r",
-									"});\r",
-									"\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"mail\": \"user1@user.com\",\r\n    \"password\": \"useruser\"\r\n    }",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/users/signin",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"users",
-								"signin"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "update",
 					"event": [
 						{
@@ -592,10 +540,6 @@
 									"\r",
 									"pm.test(\"Respond should be json\", function () {\r",
 									"    pm.response.to.be.json;\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Response time is less than 2000ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Body matches string\", function () {\r",
@@ -616,7 +560,9 @@
 									"\r",
 									"});\r",
 									"\r",
-									""
+									"pm.sendRequest(\"http://localhost:3000/api/test/restoreDatabasetest\", function (err, response) {\r",
+									"    console.log(response.json());\r",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -663,10 +609,6 @@
 									"\r",
 									"pm.test(\"Respond should be json\", function () {\r",
 									"    pm.response.to.be.json;\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Response time is less than 400ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Body matches string\", function () {\r",
@@ -953,10 +895,6 @@
 									"    pm.response.to.be.json;\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Response time is less than 200ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
-									"});\r",
-									"\r",
 									"pm.test(\"Body matches string\", function () {\r",
 									"    var body = pm.response.json();\r",
 									"    pm.expect(body.message).to.eql(\"Success\");\r",
@@ -1029,10 +967,6 @@
 									"\r",
 									"pm.test(\"Respond should be json\", function () {\r",
 									"    pm.response.to.be.json;\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Response time is less than 200ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Body matches string\", function () {\r",
@@ -1213,10 +1147,6 @@
 									"    pm.response.to.be.json;\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Response time is less than 200ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
-									"});\r",
-									"\r",
 									"pm.test(\"Body matches string\", function () {\r",
 									"    var body = pm.response.json();\r",
 									"    pm.expect(body.message).to.eql(\"Success\");\r",
@@ -1377,10 +1307,6 @@
 									"    pm.response.to.be.json;\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Response time is less than 500ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
-									"});\r",
-									"\r",
 									"pm.test(\"Body matches string\", function () {\r",
 									"    var body = pm.response.json();\r",
 									"    pm.expect(body.message).to.eql(\"Success\");\r",
@@ -1445,10 +1371,6 @@
 									"\r",
 									"pm.test(\"Respond should be json\", function () {\r",
 									"    pm.response.to.be.json;\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Response time is less than 200ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Body matches string\", function () {\r",
@@ -1532,10 +1454,6 @@
 									"    pm.response.to.be.json;\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Response time is less than 500ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
-									"});\r",
-									"\r",
 									"pm.test(\"Body matches string\", function () {\r",
 									"    var body = pm.response.json();\r",
 									"    pm.expect(body.message).to.eql(\"Success\");\r",
@@ -1593,10 +1511,6 @@
 									"    pm.response.to.be.json;\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Response time is less than 200ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
-									"});\r",
-									"\r",
 									"pm.test(\"Body matches string\", function () {\r",
 									"    var body = pm.response.json();\r",
 									"    pm.expect(body.message).to.eql(\"Success\");\r",
@@ -1606,9 +1520,7 @@
 									"    pm.expect(body.invitation.userId).to.eql(\"5fde50609e491a29eca1454d\");\r",
 									"    pm.expect(body.invitation.userName).to.eql(\"User7\");\r",
 									"\r",
-									"});\r",
-									"\r",
-									""
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -1657,10 +1569,6 @@
 									"    pm.response.to.be.json;\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Response time is less than 2000ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
-									"});\r",
-									"\r",
 									"pm.test(\"Body matches string\", function () {\r",
 									"    var body = pm.response.json();\r",
 									"    pm.expect(body.message).to.eql(\"Success\");\r",
@@ -1672,9 +1580,7 @@
 									"    pm.expect(body.res.invitation.n).to.eql(0);\r",
 									"    pm.expect(body.res.invitation.ok).to.eql(1);\r",
 									"\r",
-									"});\r",
-									"\r",
-									""
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -1723,10 +1629,6 @@
 									"    pm.response.to.be.json;\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Response time is less than 200ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
-									"});\r",
-									"\r",
 									"pm.test(\"Body matches string\", function () {\r",
 									"    var body = pm.response.json();\r",
 									"    pm.expect(body.message).to.eql(\"Success\");\r",
@@ -1735,9 +1637,7 @@
 									"    pm.expect(body.res.ok).to.eql(1);\r",
 									"    pm.expect(body.res.deletedCount).to.eql(0);\r",
 									"\r",
-									"});\r",
-									"\r",
-									""
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -1789,10 +1689,6 @@
 									"\r",
 									"pm.test(\"Respond should be json\", function () {\r",
 									"    pm.response.to.be.json;\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Response time is less than 200ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Body matches string\", function () {\r",
@@ -1892,10 +1788,6 @@
 									"\r",
 									"pm.test(\"Respond should be json\", function () {\r",
 									"    pm.response.to.be.json;\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Response time is less than 500ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Body matches string\", function () {\r",
@@ -2071,10 +1963,6 @@
 									"    pm.response.to.be.json;\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Response time is less than 1000ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
-									"});\r",
-									"\r",
 									"pm.test(\"Body matches string\", function () {\r",
 									"    var body = pm.response.json();\r",
 									"    pm.expect(body.message).to.eql(\"Success\");\r",
@@ -2153,10 +2041,6 @@
 									"    pm.response.to.be.json;\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Response time is less than 200ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
-									"});\r",
-									"\r",
 									"pm.test(\"Body matches string\", function () {\r",
 									"    var body = pm.response.json();\r",
 									"    pm.expect(body.message).to.eql(\"Success\");\r",
@@ -2166,9 +2050,7 @@
 									"    pm.expect(body.res.estimatedTime).to.eql(60);\r",
 									"    pm.expect(body.res.state.name).to.eql(\"ToDo\");\r",
 									"    \r",
-									"});\r",
-									"\r",
-									""
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -2230,10 +2112,6 @@
 									"    pm.response.to.be.json;\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Response time is less than 200ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
-									"});\r",
-									"\r",
 									"pm.test(\"Body matches string\", function () {\r",
 									"    var body = pm.response.json();\r",
 									"    pm.expect(body.message).to.eql(\"Success\");\r",
@@ -2241,9 +2119,7 @@
 									"    pm.expect(body.res.n).to.eql(1);    \r",
 									"    pm.expect(body.res.nModified).to.eql(1);    \r",
 									"    pm.expect(body.res.ok).to.eql(1);    \r",
-									"});\r",
-									"\r",
-									""
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -2301,10 +2177,6 @@
 									"    pm.response.to.be.json;\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Response time is less than 200ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
-									"});\r",
-									"\r",
 									"pm.test(\"Body matches string\", function () {\r",
 									"    var body = pm.response.json();\r",
 									"    pm.expect(body.message).to.eql(\"Success\");\r",
@@ -2312,9 +2184,7 @@
 									"    pm.expect(body.res.n).to.eql(1); \r",
 									"    pm.expect(body.res.ok).to.eql(1);\r",
 									"    pm.expect(body.res.deletedCount).to.eql(1);   \r",
-									"});\r",
-									"\r",
-									""
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -2366,10 +2236,6 @@
 									"\r",
 									"pm.test(\"Respond should be json\", function () {\r",
 									"    pm.response.to.be.json;\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Response time is less than 600ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Body matches string\", function () {\r",
@@ -2458,10 +2324,6 @@
 									"\r",
 									"pm.test(\"Respond should be json\", function () {\r",
 									"    pm.response.to.be.json;\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Response time is less than 400ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Body matches string\", function () {\r",
@@ -2610,10 +2472,6 @@
 									"    pm.response.to.be.json;\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Response time is less than 200ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
-									"});\r",
-									"\r",
 									"pm.test(\"Body matches string\", function () {\r",
 									"    var body = pm.response.json();\r",
 									"    pm.expect(body.message).to.eql(\"Success\");\r",
@@ -2686,10 +2544,6 @@
 									"    pm.response.to.be.json;\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Response time is less than 200ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
-									"});\r",
-									"\r",
 									"pm.test(\"Body matches string\", function () {\r",
 									"    var body = pm.response.json();\r",
 									"    pm.expect(body.message).to.eql(\"Success\");\r",
@@ -2703,9 +2557,7 @@
 									"    pm.expect(body.history.action).to.eql(\"Finished\");\r",
 									"    pm.expect(body.history.time).to.eql(73);\r",
 									"\r",
-									"});\r",
-									"\r",
-									""
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -2742,43 +2594,6 @@
 			]
 		},
 		{
-			"name": "test",
-			"item": [
-				{
-					"name": "restoreDatabase",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/api/test/restoreDatabasetest",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"test",
-								"restoreDatabasetest"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
 			"name": "achivements",
 			"item": [
 				{
@@ -2794,10 +2609,6 @@
 									"\r",
 									"pm.test(\"Respond should be json\", function () {\r",
 									"    pm.response.to.be.json;\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Response time is less than 200ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Body matches string\", function () {\r",
@@ -2877,10 +2688,6 @@
 									"    pm.response.to.be.json;\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Response time is less than 600ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
-									"});\r",
-									"\r",
 									"pm.test(\"Body matches string\", function () {\r",
 									"    var body = pm.response.json();\r",
 									"    pm.expect(body.message).to.eql(\"Success\");\r",
@@ -2949,10 +2756,6 @@
 									"    pm.response.to.be.json;\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Response time is less than 200ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
-									"});\r",
-									"\r",
 									"pm.test(\"Body matches string\", function () {\r",
 									"    var body = pm.response.json();\r",
 									"    pm.expect(body.message).to.eql(\"Success\");\r",
@@ -2982,7 +2785,9 @@
 									"\r",
 									"});\r",
 									"\r",
-									""
+									"pm.sendRequest(\"http://localhost:3000/api/test/restoreDatabasetest\", function (err, response) {\r",
+									"    console.log(response.json());\r",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -3016,9 +2821,7 @@
 			"script": {
 				"type": "text/javascript",
 				"exec": [
-					"pm.sendRequest(\"http://localhost:3000/api/test/restoreDatabasetest\", function (err, response) {",
-					"    console.log(response.json());",
-					"});"
+					""
 				]
 			}
 		},

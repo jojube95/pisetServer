@@ -8,7 +8,8 @@
     "start:test": "nodemon server.js test",
     "start:prod": "node server.js prod",
     "start": "node server.js ${environment}",
-    "test": "newman run postman/Piset.postman_collection.json"
+    "test": "newman run postman/Piset.postman_collection.json",
+    "ci": "start-server-and-test start:test http://localhost:3000/api/groups/get test"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
@@ -20,8 +21,9 @@
     "request": "^2.88.2"
   },
   "devDependencies": {
+    "newman": "^5.2.2",
     "nodemon": "^2.0.4",
-    "newman": "^5.2.2"
+    "start-server-and-test": "^1.12.1"
   },
   "engines": {
     "node": "10.13.0"
