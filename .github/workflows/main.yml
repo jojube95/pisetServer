@@ -38,6 +38,5 @@ jobs:
     - run: mongorestore "mongodb+srv://cluster0.53xnf.mongodb.net/piset-test" -u root -p root --archive=database/test --drop
     - run: npm install
     - run: npm run ci
-
       env:
         CI: true
